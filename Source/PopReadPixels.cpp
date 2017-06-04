@@ -3,7 +3,7 @@
 #include <sstream>
 #include <algorithm>
 #include <functional>
-
+#include <SoyOpengl.h>
 
 
 __export int			ReadPixelsAsync(void* TexturePtr,uint8_t* PixelData,int PixelDataSize,int* WidthHeightChannels)

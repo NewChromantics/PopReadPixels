@@ -6,7 +6,19 @@
 #include <algorithm>
 #include "TStringBuffer.hpp"
 #include "PopDebug.hpp"
+#include <SoyUnity.h>
 
+
+
+int Unity::GetPluginEventId()
+{
+	return 0xaabb22;
+}
+
+bool Unity::IsDebugPluginEventEnabled()
+{
+	return false;
+}
 
 
 

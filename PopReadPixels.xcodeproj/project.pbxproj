@@ -12,6 +12,29 @@
 		BF5A5A051EE43719006A0152 /* TStringBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A001EE43719006A0152 /* TStringBuffer.cpp */; };
 		BF5A5A0C1EE43BD2006A0152 /* PopReadPixels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A0A1EE43BD2006A0152 /* PopReadPixels.cpp */; };
 		BF5A5A0F1EE44101006A0152 /* PopReadPixels.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF4A6A141EA16D7D00613A64 /* PopReadPixels.bundle */; };
+		BF5A5A171EE46946006A0152 /* SoyOpengl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A111EE46946006A0152 /* SoyOpengl.cpp */; };
+		BF5A5A181EE46946006A0152 /* SoyOpenglContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A131EE46946006A0152 /* SoyOpenglContext.cpp */; };
+		BF5A5A191EE46946006A0152 /* SoyPixels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A151EE46946006A0152 /* SoyPixels.cpp */; };
+		BF5A5A1F1EE46ACF006A0152 /* SoyThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A1A1EE46ACF006A0152 /* SoyThread.cpp */; };
+		BF5A5A201EE46ACF006A0152 /* SoyTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A1C1EE46ACF006A0152 /* SoyTime.cpp */; };
+		BF5A5A211EE46ACF006A0152 /* SoyTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A1E1EE46ACF006A0152 /* SoyTime.mm */; };
+		BF5A5A281EE46AFF006A0152 /* SoyTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A221EE46AFF006A0152 /* SoyTypes.cpp */; };
+		BF5A5A291EE46AFF006A0152 /* SoyUniform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A241EE46AFF006A0152 /* SoyUniform.cpp */; };
+		BF5A5A2A1EE46AFF006A0152 /* SoyUnity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A261EE46AFF006A0152 /* SoyUnity.cpp */; };
+		BF5A5A2E1EE46B13006A0152 /* SoyString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A2B1EE46B13006A0152 /* SoyString.cpp */; };
+		BF5A5A2F1EE46B13006A0152 /* SoyString.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A2D1EE46B13006A0152 /* SoyString.mm */; };
+		BF5A5A311EE46B4B006A0152 /* memheap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A301EE46B4B006A0152 /* memheap.cpp */; };
+		BF5A5A371EE46B50006A0152 /* SoyArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A321EE46B50006A0152 /* SoyArray.cpp */; };
+		BF5A5A381EE46B50006A0152 /* SoyAssert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A331EE46B50006A0152 /* SoyAssert.cpp */; };
+		BF5A5A391EE46B50006A0152 /* SoyDebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A341EE46B50006A0152 /* SoyDebug.cpp */; };
+		BF5A5A3A1EE46B50006A0152 /* SoyDebug.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A351EE46B50006A0152 /* SoyDebug.mm */; };
+		BF5A5A3B1EE46B50006A0152 /* SoyEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A361EE46B50006A0152 /* SoyEvent.cpp */; };
+		BF5A5A3E1EE46B7D006A0152 /* SoyGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A3C1EE46B7D006A0152 /* SoyGraphics.cpp */; };
+		BF5A5A411EE46B93006A0152 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5A5A401EE46B93006A0152 /* OpenGL.framework */; };
+		BF5A5A441EE46BBA006A0152 /* SoyShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A421EE46BBA006A0152 /* SoyShader.cpp */; };
+		BF5A5A471EE46BC6006A0152 /* SoyPng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A451EE46BC6006A0152 /* SoyPng.cpp */; };
+		BF5A5A491EE46BFD006A0152 /* SoyUnity.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A481EE46BFD006A0152 /* SoyUnity.mm */; };
+		BF5A5A4B1EE46C18006A0152 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5A5A4A1EE46C18006A0152 /* CoreMedia.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +63,41 @@
 		BF5A5A071EE4372B006A0152 /* Osx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Osx.xcconfig; sourceTree = "<group>"; };
 		BF5A5A0A1EE43BD2006A0152 /* PopReadPixels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PopReadPixels.cpp; sourceTree = "<group>"; };
 		BF5A5A0B1EE43BD2006A0152 /* PopReadPixels.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PopReadPixels.hpp; sourceTree = "<group>"; };
+		BF5A5A111EE46946006A0152 /* SoyOpengl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyOpengl.cpp; path = src/SoyOpengl.cpp; sourceTree = "<group>"; };
+		BF5A5A121EE46946006A0152 /* SoyOpengl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyOpengl.h; path = src/SoyOpengl.h; sourceTree = "<group>"; };
+		BF5A5A131EE46946006A0152 /* SoyOpenglContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyOpenglContext.cpp; path = src/SoyOpenglContext.cpp; sourceTree = "<group>"; };
+		BF5A5A141EE46946006A0152 /* SoyOpenglContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyOpenglContext.h; path = src/SoyOpenglContext.h; sourceTree = "<group>"; };
+		BF5A5A151EE46946006A0152 /* SoyPixels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyPixels.cpp; path = src/SoyPixels.cpp; sourceTree = "<group>"; };
+		BF5A5A161EE46946006A0152 /* SoyPixels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyPixels.h; path = src/SoyPixels.h; sourceTree = "<group>"; };
+		BF5A5A1A1EE46ACF006A0152 /* SoyThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyThread.cpp; path = src/SoyThread.cpp; sourceTree = "<group>"; };
+		BF5A5A1B1EE46ACF006A0152 /* SoyThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyThread.h; path = src/SoyThread.h; sourceTree = "<group>"; };
+		BF5A5A1C1EE46ACF006A0152 /* SoyTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyTime.cpp; path = src/SoyTime.cpp; sourceTree = "<group>"; };
+		BF5A5A1D1EE46ACF006A0152 /* SoyTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyTime.h; path = src/SoyTime.h; sourceTree = "<group>"; };
+		BF5A5A1E1EE46ACF006A0152 /* SoyTime.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoyTime.mm; path = src/SoyTime.mm; sourceTree = "<group>"; };
+		BF5A5A221EE46AFF006A0152 /* SoyTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyTypes.cpp; path = src/SoyTypes.cpp; sourceTree = "<group>"; };
+		BF5A5A231EE46AFF006A0152 /* SoyTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyTypes.h; path = src/SoyTypes.h; sourceTree = "<group>"; };
+		BF5A5A241EE46AFF006A0152 /* SoyUniform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyUniform.cpp; path = src/SoyUniform.cpp; sourceTree = "<group>"; };
+		BF5A5A251EE46AFF006A0152 /* SoyUniform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyUniform.h; path = src/SoyUniform.h; sourceTree = "<group>"; };
+		BF5A5A261EE46AFF006A0152 /* SoyUnity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyUnity.cpp; path = src/SoyUnity.cpp; sourceTree = "<group>"; };
+		BF5A5A271EE46AFF006A0152 /* SoyUnity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyUnity.h; path = src/SoyUnity.h; sourceTree = "<group>"; };
+		BF5A5A2B1EE46B13006A0152 /* SoyString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyString.cpp; path = src/SoyString.cpp; sourceTree = "<group>"; };
+		BF5A5A2C1EE46B13006A0152 /* SoyString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyString.h; path = src/SoyString.h; sourceTree = "<group>"; };
+		BF5A5A2D1EE46B13006A0152 /* SoyString.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoyString.mm; path = src/SoyString.mm; sourceTree = "<group>"; };
+		BF5A5A301EE46B4B006A0152 /* memheap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = memheap.cpp; path = src/memheap.cpp; sourceTree = "<group>"; };
+		BF5A5A321EE46B50006A0152 /* SoyArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyArray.cpp; path = src/SoyArray.cpp; sourceTree = "<group>"; };
+		BF5A5A331EE46B50006A0152 /* SoyAssert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyAssert.cpp; path = src/SoyAssert.cpp; sourceTree = "<group>"; };
+		BF5A5A341EE46B50006A0152 /* SoyDebug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyDebug.cpp; path = src/SoyDebug.cpp; sourceTree = "<group>"; };
+		BF5A5A351EE46B50006A0152 /* SoyDebug.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoyDebug.mm; path = src/SoyDebug.mm; sourceTree = "<group>"; };
+		BF5A5A361EE46B50006A0152 /* SoyEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyEvent.cpp; path = src/SoyEvent.cpp; sourceTree = "<group>"; };
+		BF5A5A3C1EE46B7D006A0152 /* SoyGraphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyGraphics.cpp; path = src/SoyGraphics.cpp; sourceTree = "<group>"; };
+		BF5A5A3D1EE46B7D006A0152 /* SoyGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyGraphics.h; path = src/SoyGraphics.h; sourceTree = "<group>"; };
+		BF5A5A401EE46B93006A0152 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		BF5A5A421EE46BBA006A0152 /* SoyShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyShader.cpp; path = src/SoyShader.cpp; sourceTree = "<group>"; };
+		BF5A5A431EE46BBA006A0152 /* SoyShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyShader.h; path = src/SoyShader.h; sourceTree = "<group>"; };
+		BF5A5A451EE46BC6006A0152 /* SoyPng.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyPng.cpp; path = src/SoyPng.cpp; sourceTree = "<group>"; };
+		BF5A5A461EE46BC6006A0152 /* SoyPng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyPng.h; path = src/SoyPng.h; sourceTree = "<group>"; };
+		BF5A5A481EE46BFD006A0152 /* SoyUnity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoyUnity.mm; path = src/SoyUnity.mm; sourceTree = "<group>"; };
+		BF5A5A4A1EE46C18006A0152 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		BFD607741EA16F0A0035C814 /* IUnityGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUnityGraphics.h; path = Source/Unity/IUnityGraphics.h; sourceTree = "<group>"; };
 		BFD607751EA16F0A0035C814 /* IUnityGraphicsD3D9.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUnityGraphicsD3D9.h; path = Source/Unity/IUnityGraphicsD3D9.h; sourceTree = "<group>"; };
 		BFD607761EA16F0A0035C814 /* IUnityGraphicsD3D11.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUnityGraphicsD3D11.h; path = Source/Unity/IUnityGraphicsD3D11.h; sourceTree = "<group>"; };
@@ -53,6 +111,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF5A5A4B1EE46C18006A0152 /* CoreMedia.framework in Frameworks */,
+				BF5A5A411EE46B93006A0152 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +125,7 @@
 				BF0A19C21EA428F4007EBC95 /* Unity */,
 				BFD6076D1EA16ED20035C814 /* Source */,
 				BF4A6A151EA16D7D00613A64 /* Products */,
+				BF5A5A3F1EE46B93006A0152 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,9 +147,59 @@
 			path = Source/Osx;
 			sourceTree = SOURCE_ROOT;
 		};
+		BF5A5A101EE46928006A0152 /* SoyLib */ = {
+			isa = PBXGroup;
+			children = (
+				BF5A5A321EE46B50006A0152 /* SoyArray.cpp */,
+				BF5A5A331EE46B50006A0152 /* SoyAssert.cpp */,
+				BF5A5A341EE46B50006A0152 /* SoyDebug.cpp */,
+				BF5A5A351EE46B50006A0152 /* SoyDebug.mm */,
+				BF5A5A451EE46BC6006A0152 /* SoyPng.cpp */,
+				BF5A5A461EE46BC6006A0152 /* SoyPng.h */,
+				BF5A5A3C1EE46B7D006A0152 /* SoyGraphics.cpp */,
+				BF5A5A3D1EE46B7D006A0152 /* SoyGraphics.h */,
+				BF5A5A361EE46B50006A0152 /* SoyEvent.cpp */,
+				BF5A5A301EE46B4B006A0152 /* memheap.cpp */,
+				BF5A5A2B1EE46B13006A0152 /* SoyString.cpp */,
+				BF5A5A421EE46BBA006A0152 /* SoyShader.cpp */,
+				BF5A5A431EE46BBA006A0152 /* SoyShader.h */,
+				BF5A5A481EE46BFD006A0152 /* SoyUnity.mm */,
+				BF5A5A2C1EE46B13006A0152 /* SoyString.h */,
+				BF5A5A2D1EE46B13006A0152 /* SoyString.mm */,
+				BF5A5A221EE46AFF006A0152 /* SoyTypes.cpp */,
+				BF5A5A231EE46AFF006A0152 /* SoyTypes.h */,
+				BF5A5A241EE46AFF006A0152 /* SoyUniform.cpp */,
+				BF5A5A251EE46AFF006A0152 /* SoyUniform.h */,
+				BF5A5A261EE46AFF006A0152 /* SoyUnity.cpp */,
+				BF5A5A271EE46AFF006A0152 /* SoyUnity.h */,
+				BF5A5A1A1EE46ACF006A0152 /* SoyThread.cpp */,
+				BF5A5A1B1EE46ACF006A0152 /* SoyThread.h */,
+				BF5A5A1C1EE46ACF006A0152 /* SoyTime.cpp */,
+				BF5A5A1D1EE46ACF006A0152 /* SoyTime.h */,
+				BF5A5A1E1EE46ACF006A0152 /* SoyTime.mm */,
+				BF5A5A111EE46946006A0152 /* SoyOpengl.cpp */,
+				BF5A5A121EE46946006A0152 /* SoyOpengl.h */,
+				BF5A5A131EE46946006A0152 /* SoyOpenglContext.cpp */,
+				BF5A5A141EE46946006A0152 /* SoyOpenglContext.h */,
+				BF5A5A151EE46946006A0152 /* SoyPixels.cpp */,
+				BF5A5A161EE46946006A0152 /* SoyPixels.h */,
+			);
+			path = SoyLib;
+			sourceTree = "<group>";
+		};
+		BF5A5A3F1EE46B93006A0152 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF5A5A4A1EE46C18006A0152 /* CoreMedia.framework */,
+				BF5A5A401EE46B93006A0152 /* OpenGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BFD6076D1EA16ED20035C814 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BF5A5A101EE46928006A0152 /* SoyLib */,
 				BF5A59FA1EE43719006A0152 /* PopDebug.cpp */,
 				BF5A59FB1EE43719006A0152 /* PopDebug.hpp */,
 				BF5A59FC1EE43719006A0152 /* PopUnity.cpp */,
@@ -185,10 +296,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF5A5A3B1EE46B50006A0152 /* SoyEvent.cpp in Sources */,
+				BF5A5A491EE46BFD006A0152 /* SoyUnity.mm in Sources */,
+				BF5A5A2A1EE46AFF006A0152 /* SoyUnity.cpp in Sources */,
+				BF5A5A391EE46B50006A0152 /* SoyDebug.cpp in Sources */,
+				BF5A5A441EE46BBA006A0152 /* SoyShader.cpp in Sources */,
+				BF5A5A191EE46946006A0152 /* SoyPixels.cpp in Sources */,
+				BF5A5A1F1EE46ACF006A0152 /* SoyThread.cpp in Sources */,
 				BF5A5A021EE43719006A0152 /* PopDebug.cpp in Sources */,
+				BF5A5A201EE46ACF006A0152 /* SoyTime.cpp in Sources */,
 				BF5A5A031EE43719006A0152 /* PopUnity.cpp in Sources */,
+				BF5A5A2F1EE46B13006A0152 /* SoyString.mm in Sources */,
+				BF5A5A381EE46B50006A0152 /* SoyAssert.cpp in Sources */,
+				BF5A5A3E1EE46B7D006A0152 /* SoyGraphics.cpp in Sources */,
+				BF5A5A181EE46946006A0152 /* SoyOpenglContext.cpp in Sources */,
+				BF5A5A291EE46AFF006A0152 /* SoyUniform.cpp in Sources */,
+				BF5A5A311EE46B4B006A0152 /* memheap.cpp in Sources */,
+				BF5A5A2E1EE46B13006A0152 /* SoyString.cpp in Sources */,
 				BF5A5A0C1EE43BD2006A0152 /* PopReadPixels.cpp in Sources */,
 				BF5A5A051EE43719006A0152 /* TStringBuffer.cpp in Sources */,
+				BF5A5A281EE46AFF006A0152 /* SoyTypes.cpp in Sources */,
+				BF5A5A471EE46BC6006A0152 /* SoyPng.cpp in Sources */,
+				BF5A5A211EE46ACF006A0152 /* SoyTime.mm in Sources */,
+				BF5A5A3A1EE46B50006A0152 /* SoyDebug.mm in Sources */,
+				BF5A5A171EE46946006A0152 /* SoyOpengl.cpp in Sources */,
+				BF5A5A371EE46B50006A0152 /* SoyArray.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +365,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SOY_PATH = "$(SRCROOT)/Source/SoyLib";
 			};
 			name = Release;
 		};
