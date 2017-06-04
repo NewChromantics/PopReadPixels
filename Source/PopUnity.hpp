@@ -15,8 +15,11 @@
 #include <cstdint>
 #include "Unity/IUnityInterface.h"
 
+#if defined(TARGET_WINDOWS)
 #define __export			extern "C" __declspec(dllexport)
-
+#elif defined(TARGET_OSX)
+#define __export			extern "C"
+#endif
 
 __export const char*		PopDebugString();
 __export void				ReleaseDebugString(const char* String);

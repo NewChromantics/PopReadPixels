@@ -1,0 +1,48 @@
+GCC_PREPROCESSOR_DEFINITIONS_BASE = $(GCC_PREPROCESSOR_DEFINITIONS) $(inherited) TARGET_OSX
+GCC_PREPROCESSOR_DEFINITIONS = $(GCC_PREPROCESSOR_DEFINITIONS_BASE)
+
+HEADER_SEARCH_PATHS_BASE = $(HEADER_SEARCH_PATHS) $(inherited) $(SOY_PATH)/src/** $(POP_PATH)/src/** $(CUDA_PATH)/include/
+HEADER_SEARCH_PATHS = $(HEADER_SEARCH_PATHS_BASE)
+
+LIBRARY_SEARCH_PATHS_BASE = $(LIBRARY_SEARCH_PATHS) $(inherited) $(CUDA_PATH)/lib
+LIBRARY_SEARCH_PATHS = $(LIBRARY_SEARCH_PATHS_BASE)
+
+
+//	gr: not sure what we want for c yet
+//GCC_C_LANGUAGE_STANDARD = c11
+
+
+//	c++11
+CLANG_CXX_LANGUAGE_STANDARD = c++0x
+CLANG_CXX_LIBRARY = libc++
+//	gr: std::futures need 10.8 sdk onwards (now an error in 10.12 sdk)
+MACOSX_DEPLOYMENT_TARGET = 10.8
+
+
+//	universal build by default. 32bit required for unity plugins
+VALID_ARCHS = $(ARCHS_STANDARD_32_64_BIT)
+ONLY_ACTIVE_ARCH = NO
+
+//	latest SDK
+//	gr: 10.10 sdk otherwise unity plugin won't (ApplicationServices.framework version incompatibility 1(unity) vs 64) when adding CGGraphics framework
+//	use #if defined(AVAILABLE_MAC_OS_X_VERSION_10_11_AND_LATER) to detect 10.11 sdk
+SDKROOT = macosx
+
+
+//	manage obj-c auto release ourselves so we can use the pointers in c++ classes
+//	ie. without needing @property(strong) NSWindow* window;
+//	gr: ARC is 10.7 onwards so won't be availible when targetting 10.6 anyway
+CLANG_ENABLE_OBJC_ARC = NO
+
+//	set debug info to dwarf by default for faster build
+//	gr: debug with symbols otherwise breakpoints don't work when attaching
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+COPY_PHASE_STRIP = NO
+
+
+PRODUCT_BUNDLE_IDENTIFIER = NewChromantics.$(PRODUCT_NAME:rfc1034identifier)
+PRODUCT_NAME = $(TARGET_NAME)
+
+
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @rpath/Frameworks
+
