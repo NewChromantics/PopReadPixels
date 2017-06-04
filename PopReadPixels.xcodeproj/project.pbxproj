@@ -9,25 +9,37 @@
 /* Begin PBXBuildFile section */
 		BF5A5A021EE43719006A0152 /* PopDebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A59FA1EE43719006A0152 /* PopDebug.cpp */; };
 		BF5A5A031EE43719006A0152 /* PopUnity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A59FC1EE43719006A0152 /* PopUnity.cpp */; };
-		BF5A5A041EE43719006A0152 /* PopWinCap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A59FE1EE43719006A0152 /* PopWinCap.cpp */; };
 		BF5A5A051EE43719006A0152 /* TStringBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A001EE43719006A0152 /* TStringBuffer.cpp */; };
-		BF5A5A081EE4372B006A0152 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF5A5A061EE4372B006A0152 /* Info.plist */; };
-		BF5A5A091EE4372B006A0152 /* Osx.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BF5A5A071EE4372B006A0152 /* Osx.xcconfig */; };
+		BF5A5A0C1EE43BD2006A0152 /* PopReadPixels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A0A1EE43BD2006A0152 /* PopReadPixels.cpp */; };
+		BF5A5A0F1EE44101006A0152 /* PopReadPixels.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF4A6A141EA16D7D00613A64 /* PopReadPixels.bundle */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BF5A5A0D1EE43D89006A0152 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = $UNITY_ASSET_PLUGIN_PATH/Osx;
+			dstSubfolderSpec = 0;
+			files = (
+				BF5A5A0F1EE44101006A0152 /* PopReadPixels.bundle in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		BF0A19C21EA428F4007EBC95 /* Unity */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Unity; sourceTree = "<group>"; };
-		BF4A6A141EA16D7D00613A64 /* PopWinCap.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopWinCap.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF4A6A141EA16D7D00613A64 /* PopReadPixels.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopReadPixels.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5A59FA1EE43719006A0152 /* PopDebug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PopDebug.cpp; sourceTree = "<group>"; };
 		BF5A59FB1EE43719006A0152 /* PopDebug.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PopDebug.hpp; sourceTree = "<group>"; };
 		BF5A59FC1EE43719006A0152 /* PopUnity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PopUnity.cpp; sourceTree = "<group>"; };
 		BF5A59FD1EE43719006A0152 /* PopUnity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PopUnity.hpp; sourceTree = "<group>"; };
-		BF5A59FE1EE43719006A0152 /* PopWinCap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PopWinCap.cpp; sourceTree = "<group>"; };
-		BF5A59FF1EE43719006A0152 /* PopWinCap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PopWinCap.hpp; sourceTree = "<group>"; };
 		BF5A5A001EE43719006A0152 /* TStringBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TStringBuffer.cpp; sourceTree = "<group>"; };
 		BF5A5A011EE43719006A0152 /* TStringBuffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TStringBuffer.hpp; sourceTree = "<group>"; };
 		BF5A5A061EE4372B006A0152 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF5A5A071EE4372B006A0152 /* Osx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Osx.xcconfig; sourceTree = "<group>"; };
+		BF5A5A0A1EE43BD2006A0152 /* PopReadPixels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PopReadPixels.cpp; sourceTree = "<group>"; };
+		BF5A5A0B1EE43BD2006A0152 /* PopReadPixels.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PopReadPixels.hpp; sourceTree = "<group>"; };
 		BFD607741EA16F0A0035C814 /* IUnityGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUnityGraphics.h; path = Source/Unity/IUnityGraphics.h; sourceTree = "<group>"; };
 		BFD607751EA16F0A0035C814 /* IUnityGraphicsD3D9.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUnityGraphicsD3D9.h; path = Source/Unity/IUnityGraphicsD3D9.h; sourceTree = "<group>"; };
 		BFD607761EA16F0A0035C814 /* IUnityGraphicsD3D11.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUnityGraphicsD3D11.h; path = Source/Unity/IUnityGraphicsD3D11.h; sourceTree = "<group>"; };
@@ -59,7 +71,7 @@
 		BF4A6A151EA16D7D00613A64 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BF4A6A141EA16D7D00613A64 /* PopWinCap.bundle */,
+				BF4A6A141EA16D7D00613A64 /* PopReadPixels.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -81,8 +93,8 @@
 				BF5A59FB1EE43719006A0152 /* PopDebug.hpp */,
 				BF5A59FC1EE43719006A0152 /* PopUnity.cpp */,
 				BF5A59FD1EE43719006A0152 /* PopUnity.hpp */,
-				BF5A59FE1EE43719006A0152 /* PopWinCap.cpp */,
-				BF5A59FF1EE43719006A0152 /* PopWinCap.hpp */,
+				BF5A5A0A1EE43BD2006A0152 /* PopReadPixels.cpp */,
+				BF5A5A0B1EE43BD2006A0152 /* PopReadPixels.hpp */,
 				BF5A5A001EE43719006A0152 /* TStringBuffer.cpp */,
 				BF5A5A011EE43719006A0152 /* TStringBuffer.hpp */,
 				BF4A6A161EA16D7D00613A64 /* Osx */,
@@ -108,21 +120,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BF4A6A131EA16D7C00613A64 /* PopWinCap */ = {
+		BF4A6A131EA16D7C00613A64 /* PopReadPixels */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BF4A6A1A1EA16D7D00613A64 /* Build configuration list for PBXNativeTarget "PopWinCap" */;
+			buildConfigurationList = BF4A6A1A1EA16D7D00613A64 /* Build configuration list for PBXNativeTarget "PopReadPixels" */;
 			buildPhases = (
 				BF4A6A101EA16D7C00613A64 /* Sources */,
 				BF4A6A111EA16D7C00613A64 /* Frameworks */,
 				BF4A6A121EA16D7C00613A64 /* Resources */,
+				BF5A5A0D1EE43D89006A0152 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = PopWinCap;
+			name = PopReadPixels;
 			productName = PopEncodeJpeg;
-			productReference = BF4A6A141EA16D7D00613A64 /* PopWinCap.bundle */;
+			productReference = BF4A6A141EA16D7D00613A64 /* PopReadPixels.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -140,7 +153,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BF4A6A0F1EA16D7C00613A64 /* Build configuration list for PBXProject "PopWinCap" */;
+			buildConfigurationList = BF4A6A0F1EA16D7C00613A64 /* Build configuration list for PBXProject "PopReadPixels" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -152,7 +165,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BF4A6A131EA16D7C00613A64 /* PopWinCap */,
+				BF4A6A131EA16D7C00613A64 /* PopReadPixels */,
 			);
 		};
 /* End PBXProject section */
@@ -162,8 +175,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF5A5A081EE4372B006A0152 /* Info.plist in Resources */,
-				BF5A5A091EE4372B006A0152 /* Osx.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,7 +187,7 @@
 			files = (
 				BF5A5A021EE43719006A0152 /* PopDebug.cpp in Sources */,
 				BF5A5A031EE43719006A0152 /* PopUnity.cpp in Sources */,
-				BF5A5A041EE43719006A0152 /* PopWinCap.cpp in Sources */,
+				BF5A5A0C1EE43BD2006A0152 /* PopReadPixels.cpp in Sources */,
 				BF5A5A051EE43719006A0152 /* TStringBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,6 +229,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INSTALL_PATH = "$(SRCROOT)/Unity/PopReadPixels/Assets/PopReadPixels/";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
@@ -230,8 +242,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Osx/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = com.NewChromantics.PopEncodeJpeg;
+				PRODUCT_BUNDLE_IDENTIFIER = com.NewChromantics.PopReadPixels;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
@@ -241,7 +252,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BF4A6A0F1EA16D7C00613A64 /* Build configuration list for PBXProject "PopWinCap" */ = {
+		BF4A6A0F1EA16D7C00613A64 /* Build configuration list for PBXProject "PopReadPixels" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BF4A6A191EA16D7D00613A64 /* Release */,
@@ -249,7 +260,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BF4A6A1A1EA16D7D00613A64 /* Build configuration list for PBXNativeTarget "PopWinCap" */ = {
+		BF4A6A1A1EA16D7D00613A64 /* Build configuration list for PBXNativeTarget "PopReadPixels" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BF4A6A1C1EA16D7D00613A64 /* Release */,

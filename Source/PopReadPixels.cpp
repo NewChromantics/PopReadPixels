@@ -1,4 +1,4 @@
-#include "PopWinCap.hpp"
+#include "PopReadPixels.hpp"
 #include "PopDebug.hpp"
 #include <sstream>
 #include <algorithm>

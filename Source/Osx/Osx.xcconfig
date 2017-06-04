@@ -46,3 +46,4 @@ PRODUCT_NAME = $(TARGET_NAME)
 
 LD_RUNPATH_SEARCH_PATHS = $(inherited) @rpath/Frameworks
 
+UNITY_ASSET_PLUGIN_PATH = $(SRCROOT)/Unity/PopReadPixels/Assets/PopReadPixels/
