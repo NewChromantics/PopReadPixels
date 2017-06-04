@@ -30,6 +30,9 @@ public static class PopReadPixels
 
 	delegate void UnityRenderEvent(int EventId);
 
+	//	gr: mono/unity crashes and locks up a lot using this wrapper method.
+	//		by keeping a copy of the action the crash goes away (guess it's a refcount thing)
+	static List<UnityRenderEvent> PendingJobs = new List<UnityRenderEvent>();
 
 	public static IntPtr GetReadPixelsEventFunc(Texture texture,System.Action<byte[],Vector2,int,string> Callback)
 	{
@@ -43,9 +46,10 @@ public static class PopReadPixels
 		TextureFormat Format2D = (texture is Texture2D) ? (texture as Texture2D).format : TextureFormat.RGBA32;
 
 
-		UnityRenderEvent ReadPixelsWrapper = (int EventId) => {
+		UnityRenderEvent ReadPixelsWrapper = (int EventId) => 
+		{			
 			try
-			{
+			{				
 				var Result = -1;
 
 				if (texture is RenderTexture) {
@@ -69,7 +73,10 @@ public static class PopReadPixels
 			{
 				Callback.Invoke( null, Vector2.zero, 0, e.Message );
 			}
+
 		};
+
+		PendingJobs.Add (ReadPixelsWrapper);
 	
 		var FunctionPtr = Marshal.GetFunctionPointerForDelegate ( ReadPixelsWrapper );
 		return FunctionPtr;
