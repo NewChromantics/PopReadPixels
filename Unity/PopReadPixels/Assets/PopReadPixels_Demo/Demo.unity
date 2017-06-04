@@ -452,6 +452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DynamicTexture: {fileID: 8400000, guid: 91f68f4261f7d427bb2ae17ae768a2ea, type: 2}
   DynamicShader: {fileID: 2100000, guid: 257c8c9b6c530477baaafcece33219a2, type: 2}
+  OutputFilename: /Users/graham/Desktop/Test.jpg
   OnJpegEncoded:
     m_PersistentCalls:
       m_Calls: []
