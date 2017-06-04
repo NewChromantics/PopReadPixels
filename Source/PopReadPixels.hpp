@@ -4,11 +4,5 @@
 #include <functional>
 
 
-__export const char*		EnumWindowNames();
-
-
-namespace PopWinCap
-{
-	void			EnumWindows(std::function<std::string&> OnEnumWindow);
-}
+__export int			ReadPixelsAsync(void* TexturePtr,uint8_t* PixelData,int PixelDataSize,int* WidthHeightChannels);
 
