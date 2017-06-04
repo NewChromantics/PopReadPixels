@@ -432,6 +432,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2003003482}
   - component: {fileID: 2003003481}
+  - component: {fileID: 2003003483}
+  - component: {fileID: 2003003484}
   m_Layer: 0
   m_Name: BlitToJpeg
   m_TagString: Untagged
@@ -452,11 +454,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DynamicTexture: {fileID: 8400000, guid: 91f68f4261f7d427bb2ae17ae768a2ea, type: 2}
   DynamicShader: {fileID: 2100000, guid: 257c8c9b6c530477baaafcece33219a2, type: 2}
-  OutputFilename: /Users/graham/Desktop/Test.jpg
-  OnJpegEncoded:
+  OnPixelsRead:
     m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEvent_Bytes, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      m_Calls:
+      - m_Target: {fileID: 2003003483}
+        m_MethodName: OnPixels
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
+      - m_Target: {fileID: 2003003484}
+        m_MethodName: OnPixels
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_TypeName: UnityEvent_Frame, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!4 &2003003482
 Transform:
@@ -471,3 +494,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2003003483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2003003480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6041a26d3f59d4342801d0e06bb8a88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OutputFilename: /Users/graham/Desktop/Test.jpg
+--- !u!114 &2003003484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2003003480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03040a630c76048139b8dfd0da12e330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hosts:
+  - localhost:8081
+  RetryTimeSecs: 5
+  SendFrameRate: 30

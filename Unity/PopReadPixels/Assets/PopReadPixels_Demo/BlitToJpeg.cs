@@ -4,43 +4,35 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class UnityEvent_Bytes : UnityEngine.Events.UnityEvent <byte[]> {}
+public class UnityEvent_Frame : UnityEngine.Events.UnityEvent <byte[],Vector2,int> {}
 
 
 public class BlitToJpeg : MonoBehaviour {
 
 	public RenderTexture	DynamicTexture;
 	public Material			DynamicShader;
-	public string			OutputFilename = "Test.jpg";
-	public UnityEvent_Bytes	OnJpegEncoded;
+	public UnityEvent_Frame	OnPixelsRead;
 
 	void Update () {
+		
 
+		System.Action<byte[],Vector2,int,string> OnTexturePixels = (Pixels, Size, Channels, Error) => {
 
-		System.Action<byte[],Vector2,int,string> OnTexturePixels = (Pixels, Size, Channels,Error) => {
+			if (Error != null)
+				Debug.Log ("Read pixels: " + Error);
 
-			if ( Error != null )
-				Debug.Log("Read pixels: " + Error);
-
-			if ( Pixels != null )
-			{
-				try
-				{
-					var Jpeg = PopEncodeJpeg.EncodeToJpeg( Pixels, (int)Size.x, (int)Size.y, Channels, true ); 
-					OnJpegEncoded.Invoke(Jpeg);
-					System.IO.File.WriteAllBytes( OutputFilename, Jpeg );
-				}
-				catch(System.Exception e)
-				{
-					Debug.LogException( e, this );
+			if (Pixels != null) {
+				try {
+					OnPixelsRead.Invoke (Pixels, Size, Channels);
+				} catch (System.Exception e) {
+					Debug.LogException (e, this);
 				}
 			}
+
 		};
 
 		Graphics.Blit (null, DynamicTexture, DynamicShader);
 		PopReadPixels.ReadPixelsAsync (DynamicTexture, OnTexturePixels);
-
-		PopReadPixels.FlushDebug ();
 
 	}
 }
