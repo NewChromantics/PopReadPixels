@@ -30,12 +30,73 @@ public static class PopReadPixels
 
 	delegate void UnityRenderEvent(int EventId);
 
+
+	class RenderEventJob
+	{
+		public UnityRenderEvent	Lambda;
+		int					EventId;
+		bool				Finished = false;
+
+		public bool			IsFinished	{	get { return Finished; } }
+
+		public RenderEventJob(UnityRenderEvent _Lambda,int _EventId)
+		{
+			EventId = _EventId;
+			Lambda = _Lambda;
+		}
+
+
+		public bool			Finish(int _EventId)
+		{
+			if (EventId == _EventId) {
+				Finished = true;
+				return true;
+			}
+			return false;
+		}
+	};
+
 	//	gr: mono/unity crashes and locks up a lot using this wrapper method.
 	//		by keeping a copy of the action the crash goes away (guess it's a refcount thing)
-	static List<UnityRenderEvent> PendingJobs = new List<UnityRenderEvent>();
-
-	public static IntPtr GetReadPixelsEventFunc(Texture texture,System.Action<byte[],Vector2,int,string> Callback)
+	static List<RenderEventJob> PendingJobs = new List<RenderEventJob>();
+	static int JobCounter = 0;
+	static void MarkJobFinished(int EventId)
 	{
+		foreach ( var Job in PendingJobs )
+			if ( Job.Finish( EventId ) )
+				return;
+	}
+	static void CullFinishedJobs()
+	{
+		//	if I cull these, when the editor stops, the garbage collector kicks in and we lock up
+		for (int j = PendingJobs.Count-1;	j >= 0;	j--)
+			if (PendingJobs[j].IsFinished)
+				PendingJobs.RemoveAt (j);
+		
+	}
+	static void KeepAlivePendingJobs()
+	{
+		if (PendingJobs == null) {
+			Debug.Log ("Keep alive null jobs");
+			return;
+		}
+
+		//	this will leak an object, but it only happens in the editor, so should be tolerable.
+		//Debug.Log ("Keep alive " + PendingJobs.Count);
+		foreach (var Job in PendingJobs)
+			if (!Job.IsFinished)
+				GC.KeepAlive (Job.Lambda);
+	}
+	static bool AddedPlaymodeStateChangedFunc = false;
+
+	public static IntPtr GetReadPixelsEventFunc(Texture texture,System.Action<byte[],Vector2,int,string> Callback,int JobEventId)
+	{
+		//	when the editor stops, the static references are cleaned up, before the render thread is finished using it below
+		if (!AddedPlaymodeStateChangedFunc) {
+			UnityEditor.EditorApplication.playmodeStateChanged += KeepAlivePendingJobs;
+			AddedPlaymodeStateChangedFunc = true;
+		}
+
 		//	must be called on main thread... but causes GPU system. need to cache
 		var TexturePtr = texture.GetNativeTexturePtr();
 		var PixelBytes = new byte[texture.width * texture.height * 4];
@@ -74,18 +135,25 @@ public static class PopReadPixels
 				Callback.Invoke( null, Vector2.zero, 0, e.Message );
 			}
 
+			MarkJobFinished( EventId );
 		};
 
-		PendingJobs.Add (ReadPixelsWrapper);
+		CullFinishedJobs ();
+		//Debug.Log ("Post cull, pending job count=" + PendingJobs.Count);
+		PendingJobs.Add ( new RenderEventJob( ReadPixelsWrapper, JobEventId ) );
 	
+		//	this stops the editor prematurely cleaning up the lambda, but it'll leak ALL of them
+		//GC.KeepAlive (ReadPixelsWrapper);
+
 		var FunctionPtr = Marshal.GetFunctionPointerForDelegate ( ReadPixelsWrapper );
 		return FunctionPtr;
 	}
 
 	public static void ReadPixelsAsync(Texture texture,System.Action<byte[],Vector2,int,string> Callback)
 	{
-		var FunctionPtr = GetReadPixelsEventFunc (texture, Callback);
-		GL.IssuePluginEvent( FunctionPtr, 0 );
+		var EventId = JobCounter++;
+		var FunctionPtr = GetReadPixelsEventFunc (texture, Callback, EventId );
+		GL.IssuePluginEvent( FunctionPtr, EventId );
 	}
 
 	public static void FlushDebug()
