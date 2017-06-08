@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BF44DA451EE9C1B900A7A53C /* com_NewChromantics_PopReadPixels.m in Sources */ = {isa = PBXBuildFile; fileRef = BF44DA441EE9C1B900A7A53C /* com_NewChromantics_PopReadPixels.m */; };
 		BF44DA491EE9C1E200A7A53C /* SoyArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A321EE46B50006A0152 /* SoyArray.cpp */; };
 		BF44DA4A1EE9C1E500A7A53C /* SoyAssert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A331EE46B50006A0152 /* SoyAssert.cpp */; };
 		BF44DA4B1EE9C1ED00A7A53C /* SoyDebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A341EE46B50006A0152 /* SoyDebug.cpp */; };
@@ -90,8 +89,6 @@
 /* Begin PBXFileReference section */
 		BF0A19C21EA428F4007EBC95 /* Unity */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Unity; sourceTree = "<group>"; };
 		BF44DA411EE9C1B900A7A53C /* libPopReadPixels_Ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPopReadPixels_Ios.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		BF44DA431EE9C1B900A7A53C /* com_NewChromantics_PopReadPixels.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = com_NewChromantics_PopReadPixels.h; sourceTree = "<group>"; };
-		BF44DA441EE9C1B900A7A53C /* com_NewChromantics_PopReadPixels.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = com_NewChromantics_PopReadPixels.m; sourceTree = "<group>"; };
 		BF44DA631EE9C23400A7A53C /* Ios.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Ios.xcconfig; sourceTree = "<group>"; };
 		BF4A6A141EA16D7D00613A64 /* PopReadPixels_Osx.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopReadPixels_Osx.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5A59FA1EE43719006A0152 /* PopDebug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PopDebug.cpp; sourceTree = "<group>"; };
@@ -167,15 +164,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BF44DA421EE9C1B900A7A53C /* com.NewChromantics.PopReadPixels */ = {
-			isa = PBXGroup;
-			children = (
-				BF44DA431EE9C1B900A7A53C /* com_NewChromantics_PopReadPixels.h */,
-				BF44DA441EE9C1B900A7A53C /* com_NewChromantics_PopReadPixels.m */,
-			);
-			path = com.NewChromantics.PopReadPixels;
-			sourceTree = "<group>";
-		};
 		BF44DA621EE9C22500A7A53C /* Ios */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,7 +177,6 @@
 			children = (
 				BF0A19C21EA428F4007EBC95 /* Unity */,
 				BFD6076D1EA16ED20035C814 /* Source */,
-				BF44DA421EE9C1B900A7A53C /* com.NewChromantics.PopReadPixels */,
 				BF4A6A151EA16D7D00613A64 /* Products */,
 				BF5A5A3F1EE46B93006A0152 /* Frameworks */,
 			);
@@ -388,7 +375,6 @@
 			files = (
 				BF44DA5E1EE9C1FD00A7A53C /* PopDebug.cpp in Sources */,
 				BF44DA5A1EE9C1FD00A7A53C /* SoyTime.mm in Sources */,
-				BF44DA451EE9C1B900A7A53C /* com_NewChromantics_PopReadPixels.m in Sources */,
 				BF44DA581EE9C1FD00A7A53C /* SoyThread.cpp in Sources */,
 				BF44DA571EE9C1FD00A7A53C /* SoyUnity.cpp in Sources */,
 				BF44DA4D1EE9C1ED00A7A53C /* SoyPng.cpp in Sources */,
