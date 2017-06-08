@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Source\PopDebug.cpp" />
+    <ClCompile Include="..\Source\PopReadPixels.cpp" />
+    <ClCompile Include="..\Source\PopUnity.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\GL\glew.c" />
+    <ClCompile Include="..\Source\SoyLib\src\memheap.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyArray.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyAssert.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyDebug.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyDirectx.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyDirectx9.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyEvent.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyGraphics.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyMediaFormat.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyOpengl.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyOpenglContext.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyPixels.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyPng.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyShader.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyString.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyThread.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyTime.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyTypes.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyUniform.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyUnity.cpp" />
+    <ClCompile Include="..\Source\TStringBuffer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Source\PopDebug.hpp" />
+    <ClInclude Include="..\Source\PopReadPixels.hpp" />
+    <ClInclude Include="..\Source\PopUnity.hpp" />
+    <ClInclude Include="..\Source\SoyLib\src\array.hpp" />
+    <ClInclude Include="..\Source\SoyLib\src\bufferarray.hpp" />
+    <ClInclude Include="..\Source\SoyLib\src\GL\glew.h" />
+    <ClInclude Include="..\Source\SoyLib\src\GL\glxew.h" />
+    <ClInclude Include="..\Source\SoyLib\src\GL\wglew.h" />
+    <ClInclude Include="..\Source\SoyLib\src\memheap.hpp" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyArray.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyAssert.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyDebug.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyDirectx.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyDirectx9.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyEvent.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyGraphics.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyMediaFormat.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyOpengl.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyOpenglContext.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyPixels.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyPng.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyShader.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyString.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyThread.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyTime.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyTypes.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyTypes_Windows.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyUniform.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyUnity.h" />
+    <ClInclude Include="..\Source\TStringBuffer.hpp" />
+    <ClInclude Include="..\Source\Unity\IUnityGraphics.h" />
+    <ClInclude Include="..\Source\Unity\IUnityGraphicsD3D11.h" />
+    <ClInclude Include="..\Source\Unity\IUnityGraphicsD3D12.h" />
+    <ClInclude Include="..\Source\Unity\IUnityGraphicsD3D9.h" />
+    <ClInclude Include="..\Source\Unity\IUnityGraphicsMetal.h" />
+    <ClInclude Include="..\Source\Unity\IUnityInterface.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D3E8A495-934B-437E-AB4B-0C956F4E24B4}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>PopReadPixelsWindows</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Source\Windows\Windows.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Source\Windows\Windows.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Source\Windows\Windows.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Source\Windows\Windows.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;POPREADPIXELSWINDOWS_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;POPREADPIXELSWINDOWS_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;POPREADPIXELSWINDOWS_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;POPREADPIXELSWINDOWS_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
