@@ -3,20 +3,39 @@
 #include <sstream>
 #include <algorithm>
 #include <functional>
-#include <SoyOpengl.h>
-#include <SoyOpenglContext.h>
 #include <SoyUnity.h>
 
+#if defined(ENABLE_OPENGL)
+#include <SoyOpengl.h>
+#include <SoyOpenglContext.h>
+#endif
+
+#if defined(ENABLE_DIRECTX)
+#include <SoyDirectx.h>
+#endif
+
+#if defined(ENABLE_DIRECTX9)
+#include <SoyDirectx9.h>
+#endif
 
 int ReadPixelFromTexture(void* TexturePtr,uint8_t* PixelData,int PixelDataSize,int* WidthHeightChannels,SoyPixelsMeta Meta)
 {
 	WidthHeightChannels[2] = Meta.GetChannels();
-	
+	SoyPixelsRemote Pixels( PixelData, PixelDataSize, Meta );
+
+#if defined(ENABLE_OPENGL)
 	auto OpenglContext = Unity::GetOpenglContextPtr();
+#endif
+
 #if defined(ENABLE_DIRECTX)
 	auto DirectxContext = Unity::GetDirectxContextPtr();
 #endif
-	
+
+#if defined(ENABLE_DIRECTX9)
+	auto Directx9Context = Unity::GetDirectx9ContextPtr();
+#endif
+
+#if defined(ENABLE_OPENGL)
 	if ( OpenglContext )
 	{
 		//	gr: in this plugin we're not calling the context iteration all the time, so lets do it ourselves for ::init() to create GLGenBuffers
@@ -25,16 +44,25 @@ int ReadPixelFromTexture(void* TexturePtr,uint8_t* PixelData,int PixelDataSize,i
 		//	assuming type atm... maybe we can extract it via opengl?
 		GLenum Type = GL_TEXTURE_2D;
 		Opengl::TTexture Texture( TexturePtr, Meta, Type );
-		SoyPixelsRemote Pixels( PixelData, PixelDataSize, Meta );
 		Texture.Read( Pixels );
 		return 0;
 	}
+#endif
 	
 #if defined(ENABLE_DIRECTX)
 	if ( DirectxContext )
 	{
-		Directx::TTexture Texture( static_cast<ID3D11Texture2D*>(TextureId) );
-		pInstance->WriteFrame( Texture, size_cast<size_t>(StreamIndex) );
+		Directx::TTexture Texture( static_cast<ID3D11Texture2D*>(TexturePtr) );
+		Texture.Read( Pixels, *DirectxContext );
+		return 0;
+	}
+#endif
+
+#if defined(ENABLE_DIRECTX9)
+	if ( Directx9Context )
+	{
+		Directx9::TTexture Texture( static_cast<IDirect3DTexture9*>(TexturePtr) );
+		Texture.Read( Pixels, *Directx9Context );
 		return 0;
 	}
 #endif
