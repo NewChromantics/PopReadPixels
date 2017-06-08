@@ -467,7 +467,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 1
       - m_Target: {fileID: 2003003484}
         m_MethodName: OnPixels
         m_Mode: 0
@@ -505,7 +505,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6041a26d3f59d4342801d0e06bb8a88a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IncrementFilename: 1
   OutputFilename: /Users/graham/Desktop/Test.jpg
+  OutputFileDir: /Users/graham/Desktop/jpeg frames
 --- !u!114 &2003003484
 MonoBehaviour:
   m_ObjectHideFlags: 0
