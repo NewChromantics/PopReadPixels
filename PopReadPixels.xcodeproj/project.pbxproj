@@ -7,11 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF44DA451EE9C1B900A7A53C /* com_NewChromantics_PopReadPixels.m in Sources */ = {isa = PBXBuildFile; fileRef = BF44DA441EE9C1B900A7A53C /* com_NewChromantics_PopReadPixels.m */; };
+		BF44DA491EE9C1E200A7A53C /* SoyArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A321EE46B50006A0152 /* SoyArray.cpp */; };
+		BF44DA4A1EE9C1E500A7A53C /* SoyAssert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A331EE46B50006A0152 /* SoyAssert.cpp */; };
+		BF44DA4B1EE9C1ED00A7A53C /* SoyDebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A341EE46B50006A0152 /* SoyDebug.cpp */; };
+		BF44DA4C1EE9C1ED00A7A53C /* SoyDebug.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A351EE46B50006A0152 /* SoyDebug.mm */; };
+		BF44DA4D1EE9C1ED00A7A53C /* SoyPng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A451EE46BC6006A0152 /* SoyPng.cpp */; };
+		BF44DA4E1EE9C1FD00A7A53C /* SoyGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A3C1EE46B7D006A0152 /* SoyGraphics.cpp */; };
+		BF44DA4F1EE9C1FD00A7A53C /* SoyEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A361EE46B50006A0152 /* SoyEvent.cpp */; };
+		BF44DA501EE9C1FD00A7A53C /* memheap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A301EE46B4B006A0152 /* memheap.cpp */; };
+		BF44DA511EE9C1FD00A7A53C /* SoyString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A2B1EE46B13006A0152 /* SoyString.cpp */; };
+		BF44DA521EE9C1FD00A7A53C /* SoyShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A421EE46BBA006A0152 /* SoyShader.cpp */; };
+		BF44DA531EE9C1FD00A7A53C /* SoyUnity.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A481EE46BFD006A0152 /* SoyUnity.mm */; };
+		BF44DA541EE9C1FD00A7A53C /* SoyString.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A2D1EE46B13006A0152 /* SoyString.mm */; };
+		BF44DA551EE9C1FD00A7A53C /* SoyTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A221EE46AFF006A0152 /* SoyTypes.cpp */; };
+		BF44DA561EE9C1FD00A7A53C /* SoyUniform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A241EE46AFF006A0152 /* SoyUniform.cpp */; };
+		BF44DA571EE9C1FD00A7A53C /* SoyUnity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A261EE46AFF006A0152 /* SoyUnity.cpp */; };
+		BF44DA581EE9C1FD00A7A53C /* SoyThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A1A1EE46ACF006A0152 /* SoyThread.cpp */; };
+		BF44DA591EE9C1FD00A7A53C /* SoyTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A1C1EE46ACF006A0152 /* SoyTime.cpp */; };
+		BF44DA5A1EE9C1FD00A7A53C /* SoyTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A1E1EE46ACF006A0152 /* SoyTime.mm */; };
+		BF44DA5B1EE9C1FD00A7A53C /* SoyOpengl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A111EE46946006A0152 /* SoyOpengl.cpp */; };
+		BF44DA5C1EE9C1FD00A7A53C /* SoyOpenglContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A131EE46946006A0152 /* SoyOpenglContext.cpp */; };
+		BF44DA5D1EE9C1FD00A7A53C /* SoyPixels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A151EE46946006A0152 /* SoyPixels.cpp */; };
+		BF44DA5E1EE9C1FD00A7A53C /* PopDebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A59FA1EE43719006A0152 /* PopDebug.cpp */; };
+		BF44DA5F1EE9C1FD00A7A53C /* PopUnity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A59FC1EE43719006A0152 /* PopUnity.cpp */; };
+		BF44DA601EE9C1FD00A7A53C /* PopReadPixels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A0A1EE43BD2006A0152 /* PopReadPixels.cpp */; };
+		BF44DA611EE9C1FD00A7A53C /* TStringBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A001EE43719006A0152 /* TStringBuffer.cpp */; };
+		BF44DA641EE9C33D00A7A53C /* libPopReadPixels_Ios.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF44DA411EE9C1B900A7A53C /* libPopReadPixels_Ios.a */; };
 		BF5A5A021EE43719006A0152 /* PopDebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A59FA1EE43719006A0152 /* PopDebug.cpp */; };
 		BF5A5A031EE43719006A0152 /* PopUnity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A59FC1EE43719006A0152 /* PopUnity.cpp */; };
 		BF5A5A051EE43719006A0152 /* TStringBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A001EE43719006A0152 /* TStringBuffer.cpp */; };
 		BF5A5A0C1EE43BD2006A0152 /* PopReadPixels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A0A1EE43BD2006A0152 /* PopReadPixels.cpp */; };
-		BF5A5A0F1EE44101006A0152 /* PopReadPixels.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF4A6A141EA16D7D00613A64 /* PopReadPixels.bundle */; };
+		BF5A5A0F1EE44101006A0152 /* PopReadPixels_Osx.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF4A6A141EA16D7D00613A64 /* PopReadPixels_Osx.bundle */; };
 		BF5A5A171EE46946006A0152 /* SoyOpengl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A111EE46946006A0152 /* SoyOpengl.cpp */; };
 		BF5A5A181EE46946006A0152 /* SoyOpenglContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A131EE46946006A0152 /* SoyOpenglContext.cpp */; };
 		BF5A5A191EE46946006A0152 /* SoyPixels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A151EE46946006A0152 /* SoyPixels.cpp */; };
@@ -38,13 +65,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		BF44DA3F1EE9C1B900A7A53C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = $UNITY_ASSET_PLUGIN_PATH/Ios;
+			dstSubfolderSpec = 0;
+			files = (
+				BF44DA641EE9C33D00A7A53C /* libPopReadPixels_Ios.a in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BF5A5A0D1EE43D89006A0152 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = $UNITY_ASSET_PLUGIN_PATH/Osx;
 			dstSubfolderSpec = 0;
 			files = (
-				BF5A5A0F1EE44101006A0152 /* PopReadPixels.bundle in CopyFiles */,
+				BF5A5A0F1EE44101006A0152 /* PopReadPixels_Osx.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,7 +89,11 @@
 
 /* Begin PBXFileReference section */
 		BF0A19C21EA428F4007EBC95 /* Unity */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Unity; sourceTree = "<group>"; };
-		BF4A6A141EA16D7D00613A64 /* PopReadPixels.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopReadPixels.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF44DA411EE9C1B900A7A53C /* libPopReadPixels_Ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPopReadPixels_Ios.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF44DA431EE9C1B900A7A53C /* com_NewChromantics_PopReadPixels.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = com_NewChromantics_PopReadPixels.h; sourceTree = "<group>"; };
+		BF44DA441EE9C1B900A7A53C /* com_NewChromantics_PopReadPixels.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = com_NewChromantics_PopReadPixels.m; sourceTree = "<group>"; };
+		BF44DA631EE9C23400A7A53C /* Ios.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Ios.xcconfig; sourceTree = "<group>"; };
+		BF4A6A141EA16D7D00613A64 /* PopReadPixels_Osx.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopReadPixels_Osx.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5A59FA1EE43719006A0152 /* PopDebug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PopDebug.cpp; sourceTree = "<group>"; };
 		BF5A59FB1EE43719006A0152 /* PopDebug.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PopDebug.hpp; sourceTree = "<group>"; };
 		BF5A59FC1EE43719006A0152 /* PopUnity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PopUnity.cpp; sourceTree = "<group>"; };
@@ -107,6 +148,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BF44DA3E1EE9C1B900A7A53C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BF4A6A111EA16D7C00613A64 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -119,11 +167,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF44DA421EE9C1B900A7A53C /* com.NewChromantics.PopReadPixels */ = {
+			isa = PBXGroup;
+			children = (
+				BF44DA431EE9C1B900A7A53C /* com_NewChromantics_PopReadPixels.h */,
+				BF44DA441EE9C1B900A7A53C /* com_NewChromantics_PopReadPixels.m */,
+			);
+			path = com.NewChromantics.PopReadPixels;
+			sourceTree = "<group>";
+		};
+		BF44DA621EE9C22500A7A53C /* Ios */ = {
+			isa = PBXGroup;
+			children = (
+				BF44DA631EE9C23400A7A53C /* Ios.xcconfig */,
+			);
+			path = Ios;
+			sourceTree = "<group>";
+		};
 		BF4A6A0B1EA16D7C00613A64 = {
 			isa = PBXGroup;
 			children = (
 				BF0A19C21EA428F4007EBC95 /* Unity */,
 				BFD6076D1EA16ED20035C814 /* Source */,
+				BF44DA421EE9C1B900A7A53C /* com.NewChromantics.PopReadPixels */,
 				BF4A6A151EA16D7D00613A64 /* Products */,
 				BF5A5A3F1EE46B93006A0152 /* Frameworks */,
 			);
@@ -132,7 +198,8 @@
 		BF4A6A151EA16D7D00613A64 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BF4A6A141EA16D7D00613A64 /* PopReadPixels.bundle */,
+				BF4A6A141EA16D7D00613A64 /* PopReadPixels_Osx.bundle */,
+				BF44DA411EE9C1B900A7A53C /* libPopReadPixels_Ios.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -208,6 +275,7 @@
 				BF5A5A0B1EE43BD2006A0152 /* PopReadPixels.hpp */,
 				BF5A5A001EE43719006A0152 /* TStringBuffer.cpp */,
 				BF5A5A011EE43719006A0152 /* TStringBuffer.hpp */,
+				BF44DA621EE9C22500A7A53C /* Ios */,
 				BF4A6A161EA16D7D00613A64 /* Osx */,
 				BFD607731EA16EFC0035C814 /* Unity */,
 			);
@@ -231,9 +299,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BF4A6A131EA16D7C00613A64 /* PopReadPixels */ = {
+		BF44DA401EE9C1B900A7A53C /* PopReadPixels_Ios */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BF4A6A1A1EA16D7D00613A64 /* Build configuration list for PBXNativeTarget "PopReadPixels" */;
+			buildConfigurationList = BF44DA481EE9C1B900A7A53C /* Build configuration list for PBXNativeTarget "PopReadPixels_Ios" */;
+			buildPhases = (
+				BF44DA3D1EE9C1B900A7A53C /* Sources */,
+				BF44DA3E1EE9C1B900A7A53C /* Frameworks */,
+				BF44DA3F1EE9C1B900A7A53C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PopReadPixels_Ios;
+			productName = com.NewChromantics.PopReadPixels;
+			productReference = BF44DA411EE9C1B900A7A53C /* libPopReadPixels_Ios.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		BF4A6A131EA16D7C00613A64 /* PopReadPixels_Osx */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF4A6A1A1EA16D7D00613A64 /* Build configuration list for PBXNativeTarget "PopReadPixels_Osx" */;
 			buildPhases = (
 				BF4A6A101EA16D7C00613A64 /* Sources */,
 				BF4A6A111EA16D7C00613A64 /* Frameworks */,
@@ -244,9 +329,9 @@
 			);
 			dependencies = (
 			);
-			name = PopReadPixels;
+			name = PopReadPixels_Osx;
 			productName = PopEncodeJpeg;
-			productReference = BF4A6A141EA16D7D00613A64 /* PopReadPixels.bundle */;
+			productReference = BF4A6A141EA16D7D00613A64 /* PopReadPixels_Osx.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -258,6 +343,10 @@
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = NewChromantics;
 				TargetAttributes = {
+					BF44DA401EE9C1B900A7A53C = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
 					BF4A6A131EA16D7C00613A64 = {
 						CreatedOnToolsVersion = 8.1;
 						ProvisioningStyle = Automatic;
@@ -276,7 +365,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BF4A6A131EA16D7C00613A64 /* PopReadPixels */,
+				BF4A6A131EA16D7C00613A64 /* PopReadPixels_Osx */,
+				BF44DA401EE9C1B900A7A53C /* PopReadPixels_Ios */,
 			);
 		};
 /* End PBXProject section */
@@ -292,6 +382,39 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BF44DA3D1EE9C1B900A7A53C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF44DA5E1EE9C1FD00A7A53C /* PopDebug.cpp in Sources */,
+				BF44DA5A1EE9C1FD00A7A53C /* SoyTime.mm in Sources */,
+				BF44DA451EE9C1B900A7A53C /* com_NewChromantics_PopReadPixels.m in Sources */,
+				BF44DA581EE9C1FD00A7A53C /* SoyThread.cpp in Sources */,
+				BF44DA571EE9C1FD00A7A53C /* SoyUnity.cpp in Sources */,
+				BF44DA4D1EE9C1ED00A7A53C /* SoyPng.cpp in Sources */,
+				BF44DA541EE9C1FD00A7A53C /* SoyString.mm in Sources */,
+				BF44DA5D1EE9C1FD00A7A53C /* SoyPixels.cpp in Sources */,
+				BF44DA551EE9C1FD00A7A53C /* SoyTypes.cpp in Sources */,
+				BF44DA521EE9C1FD00A7A53C /* SoyShader.cpp in Sources */,
+				BF44DA5C1EE9C1FD00A7A53C /* SoyOpenglContext.cpp in Sources */,
+				BF44DA4F1EE9C1FD00A7A53C /* SoyEvent.cpp in Sources */,
+				BF44DA4E1EE9C1FD00A7A53C /* SoyGraphics.cpp in Sources */,
+				BF44DA611EE9C1FD00A7A53C /* TStringBuffer.cpp in Sources */,
+				BF44DA511EE9C1FD00A7A53C /* SoyString.cpp in Sources */,
+				BF44DA4A1EE9C1E500A7A53C /* SoyAssert.cpp in Sources */,
+				BF44DA561EE9C1FD00A7A53C /* SoyUniform.cpp in Sources */,
+				BF44DA591EE9C1FD00A7A53C /* SoyTime.cpp in Sources */,
+				BF44DA5B1EE9C1FD00A7A53C /* SoyOpengl.cpp in Sources */,
+				BF44DA4C1EE9C1ED00A7A53C /* SoyDebug.mm in Sources */,
+				BF44DA491EE9C1E200A7A53C /* SoyArray.cpp in Sources */,
+				BF44DA4B1EE9C1ED00A7A53C /* SoyDebug.cpp in Sources */,
+				BF44DA5F1EE9C1FD00A7A53C /* PopUnity.cpp in Sources */,
+				BF44DA501EE9C1FD00A7A53C /* memheap.cpp in Sources */,
+				BF44DA601EE9C1FD00A7A53C /* PopReadPixels.cpp in Sources */,
+				BF44DA531EE9C1FD00A7A53C /* SoyUnity.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BF4A6A101EA16D7C00613A64 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -327,6 +450,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		BF44DA471EE9C1B900A7A53C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF44DA631EE9C23400A7A53C /* Ios.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		BF4A6A191EA16D7D00613A64 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -386,6 +523,13 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BF44DA481EE9C1B900A7A53C /* Build configuration list for PBXNativeTarget "PopReadPixels_Ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF44DA471EE9C1B900A7A53C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		BF4A6A0F1EA16D7C00613A64 /* Build configuration list for PBXProject "PopReadPixels" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -394,7 +538,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BF4A6A1A1EA16D7D00613A64 /* Build configuration list for PBXNativeTarget "PopReadPixels" */ = {
+		BF4A6A1A1EA16D7D00613A64 /* Build configuration list for PBXNativeTarget "PopReadPixels_Osx" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BF4A6A1C1EA16D7D00613A64 /* Release */,

@@ -12,7 +12,14 @@ using System.Collections.Generic;
 /// </summary>
 public static class PopReadPixels 
 {
-	private const string PluginName = "PopReadPixels";
+#if UNITY_EDITOR_OSX || UNITY_OSX
+	private const string PluginName = "PopReadPixels_Osx";
+#elif UNITY_IOS
+	//private const string PluginName = "PopReadPixels_Ios";
+	private const string PluginName = "__Internal";
+#else
+#error Unsupported platform
+#endif
 
 	[DllImport (PluginName, CallingConvention = CallingConvention.Cdecl)]
 	private static extern System.IntPtr	PopDebugString();
