@@ -31,6 +31,9 @@
       <StackReserveSize>8388608</StackReserveSize>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>echo f | xcopy /Y $(TargetPath) $(ProjectDir)..\Unity\PopReadPixels\Assets\PopReadPixels\$(Platform)\PopReadPixels.dll</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <BuildMacro Include="SOY_PATH">
