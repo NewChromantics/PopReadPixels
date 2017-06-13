@@ -8,6 +8,43 @@
 #include <SoyUnity.h>
 
 
+class TCache
+{
+public:
+	TCache() :
+		mTexturePtr	( nullptr )
+	{
+	}
+	
+	bool			Used() const		{	return mTexturePtr != nullptr;	}
+	void			Release()			{	mTexturePtr = nullptr;	}
+	void			OnRead()			{	(*mPixelRevision)++;	}
+	
+public:
+	void*			mTexturePtr;
+	uint8_t*		mPixelData;			//	c#
+	uint8_t*		mPixelRevision;		//	c#
+	uint32_t		mPixelDataSize;
+	SoyPixelsMeta	mTextureMeta;
+};
+
+
+namespace PopReadPixels
+{
+	//	gr: could be big as it's just sitting in memory, but made small so we
+	//	can ensure client is releasing in case in future we NEED releasing
+#define MAX_CACHES	200
+	TCache		gCaches[MAX_CACHES];
+	
+	TCache&		AllocCache(int& CacheIndex);
+	TCache&		GetCache(int CacheIndex);
+	void		ReleaseCache(uint32_t CacheIndex);
+}
+
+
+
+
+
 int ReadPixelFromTexture(void* TexturePtr,uint8_t* PixelData,int PixelDataSize,int* WidthHeightChannels,SoyPixelsMeta Meta)
 {
 	WidthHeightChannels[2] = Meta.GetChannels();
@@ -92,4 +129,208 @@ __export int ReadPixelFromRenderTexture(void* TexturePtr,uint8_t* PixelData,int 
 	}
 }
 
+
+
+
+TCache& PopReadPixels::AllocCache(int& CacheIndex)
+{
+	for ( int i=0;	i<MAX_CACHES;	i++ )
+	{
+		auto& Cache = gCaches[i];
+		if ( Cache.Used() )
+			continue;
+		
+		CacheIndex = i;
+		return Cache;
+	}
+	
+	throw Soy::AssertException("No free caches");
+}
+
+TCache& PopReadPixels::GetCache(int CacheIndex)
+{
+	if ( CacheIndex < 0 || CacheIndex >= MAX_CACHES )
+	{
+		throw Soy::AssertException("Invalid Cache Index");
+	}
+	
+	auto& Cache = gCaches[CacheIndex];
+	if ( !Cache.Used() )
+	{
+		throw Soy::AssertException("Cache not allocated");
+	}
+	
+	return Cache;
+}
+
+
+void PopReadPixels::ReleaseCache(uint32_t CacheIndex)
+{
+	if ( CacheIndex >= MAX_CACHES )
+	{
+		throw Soy::AssertException("Invalid Cache Index");
+	}
+	
+	gCaches[CacheIndex].Release();
+}
+
+
+int AllocCacheRenderTexture(void* TexturePtr,uint8_t* PixelData,uint8_t* PixelRevision,int PixelDataSize,SoyPixelsMeta Meta)
+{
+	int CacheIndex = -1;
+	auto& Cache = PopReadPixels::AllocCache(CacheIndex);
+	Cache.mTexturePtr = TexturePtr;
+	Cache.mPixelData = PixelData;
+	Cache.mPixelRevision = PixelRevision;
+	Cache.mPixelDataSize = PixelDataSize;
+	Cache.mTextureMeta = Meta;
+	return CacheIndex;
+}
+
+int AllocCacheRenderTexture(void* TexturePtr,uint8_t* PixelData,uint8_t* PixelRevision,int PixelDataSize,int Width,int Height,int Channels,Unity::RenderTexturePixelFormat::Type PixelFormat)
+{
+	try
+	{
+		SoyPixelsMeta Meta( Width, Height, Unity::GetPixelFormat( PixelFormat ) );
+		return AllocCacheRenderTexture( TexturePtr, PixelData, PixelRevision, PixelDataSize, Meta );
+	}
+	catch(const std::exception& e)
+	{
+		std::stringstream Error;
+		Error << "Exception in EnumStrings; " << e.what();
+		PopUnity::DebugLog( Error.str() );
+		return -1;
+	}
+	catch(...)
+	{
+		std::stringstream Error;
+		Error << "Unknown exception in EnumStrings";
+		PopUnity::DebugLog( Error.str() );
+		return -1;
+	}
+}
+
+int AllocCacheTexture2D(void* TexturePtr,uint8_t* PixelData,uint8_t* PixelRevision,int PixelDataSize,int Width,int Height,int Channels,Unity::Texture2DPixelFormat::Type PixelFormat)
+{
+	try
+	{
+		SoyPixelsMeta Meta( Width, Height, Unity::GetPixelFormat( PixelFormat ) );
+		return AllocCacheRenderTexture( TexturePtr, PixelData, PixelRevision, PixelDataSize, Meta );
+	}
+	catch(const std::exception& e)
+	{
+		std::stringstream Error;
+		Error << "Exception in EnumStrings; " << e.what();
+		PopUnity::DebugLog( Error.str() );
+		return -1;
+	}
+	catch(...)
+	{
+		std::stringstream Error;
+		Error << "Unknown exception in EnumStrings";
+		PopUnity::DebugLog( Error.str() );
+		return -1;
+	}
+}
+
+
+
+__export void ReleaseCache(uint8_t Cache)
+{
+	try
+	{
+		PopReadPixels::ReleaseCache( Cache );
+	}
+	catch(const std::exception& e)
+	{
+		std::stringstream Error;
+		Error << "Exception in EnumStrings; " << e.what();
+		PopUnity::DebugLog( Error.str() );
+	}
+	catch(...)
+	{
+		std::stringstream Error;
+		Error << "Unknown exception in EnumStrings";
+		PopUnity::DebugLog( Error.str() );
+	}
+}
+
+__export UNITY_INTERFACE_API void ReadPixelsFromCache(int CacheIndex)
+{
+	try
+	{
+		auto& Cache = PopReadPixels::GetCache(CacheIndex);
+		int WidthHeightChannels[3];
+		ReadPixelFromTexture( Cache.mTexturePtr, Cache.mPixelData, Cache.mPixelDataSize, WidthHeightChannels, Cache.mTextureMeta );
+		Cache.OnRead();
+	}
+	catch(const std::exception& e)
+	{
+		std::stringstream Error;
+		Error << "Exception in EnumStrings; " << e.what();
+		PopUnity::DebugLog( Error.str() );
+	}
+	catch(...)
+	{
+		std::stringstream Error;
+		Error << "Unknown exception in EnumStrings";
+		PopUnity::DebugLog( Error.str() );
+	}
+}
+
+
+__export UnityRenderingEvent AllocCacheRenderTexture(void* TexturePtr,uint8_t* PixelData,uint8_t* PixelRevision,uint8_t* CacheIndex,int PixelDataSize,int Width,int Height,int Channels,Unity::RenderTexturePixelFormat::Type PixelFormat)
+{
+	try
+	{
+		auto CacheIndex32 = AllocCacheRenderTexture( TexturePtr, PixelData, PixelRevision, PixelDataSize, Width, Height, Channels, PixelFormat );
+		if ( CacheIndex32 < 0 )
+			throw Soy::AssertException("Failed to alloc");
+		uint8_t CacheIndex8 = CacheIndex32;
+		*CacheIndex = CacheIndex8;
+		return ReadPixelsFromCache;
+	}
+	catch(const std::exception& e)
+	{
+		std::stringstream Error;
+		Error << "Exception in EnumStrings; " << e.what();
+		PopUnity::DebugLog( Error.str() );
+		return nullptr;
+	}
+	catch(...)
+	{
+		std::stringstream Error;
+		Error << "Unknown exception in EnumStrings";
+		PopUnity::DebugLog( Error.str() );
+		return nullptr;
+	}
+}
+
+
+__export UnityRenderingEvent AllocCacheTexture2D(void* TexturePtr,uint8_t* PixelData,uint8_t* PixelRevision,uint8_t* CacheIndex,int PixelDataSize,int Width,int Height,int Channels,Unity::Texture2DPixelFormat::Type PixelFormat)
+{
+	try
+	{
+		auto CacheIndex32 = AllocCacheTexture2D( TexturePtr, PixelData, PixelRevision, PixelDataSize, Width, Height, Channels, PixelFormat );
+		if ( CacheIndex32 < 0 )
+			throw Soy::AssertException("Failed to alloc");
+		uint8_t CacheIndex8 = CacheIndex32;
+		*CacheIndex = CacheIndex8;
+		return ReadPixelsFromCache;
+	}
+	catch(const std::exception& e)
+	{
+		std::stringstream Error;
+		Error << "Exception in EnumStrings; " << e.what();
+		PopUnity::DebugLog( Error.str() );
+		return nullptr;
+	}
+	catch(...)
+	{
+		std::stringstream Error;
+		Error << "Unknown exception in EnumStrings";
+		PopUnity::DebugLog( Error.str() );
+		return nullptr;
+	}
+}
 

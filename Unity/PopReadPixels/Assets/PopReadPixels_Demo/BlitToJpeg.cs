@@ -13,17 +13,19 @@ public class BlitToJpeg : MonoBehaviour {
 	public Material			DynamicShader;
 	public UnityEvent_Frame	OnPixelsRead;
 
+	PopReadPixels.JobCache	AsyncRead;
+
 	void Update () {
 		
 
-		System.Action<byte[],Vector2,int,string> OnTexturePixels = (Pixels, Size, Channels, Error) => {
+		System.Action<byte[],int,string> OnTexturePixels = (Pixels, Channels, Error) => {
 
 			if (Error != null)
 				Debug.Log ("Read pixels: " + Error);
 
 			if (Pixels != null) {
 				try {
-					OnPixelsRead.Invoke (Pixels, Size, Channels);
+					OnPixelsRead.Invoke (Pixels, new Vector2(DynamicTexture.width,DynamicTexture.height), Channels);
 				} catch (System.Exception e) {
 					Debug.LogException (e, this);
 				}
@@ -32,7 +34,20 @@ public class BlitToJpeg : MonoBehaviour {
 		};
 
 		Graphics.Blit (null, DynamicTexture, DynamicShader);
-		PopReadPixels.ReadPixelsAsync (DynamicTexture, OnTexturePixels);
 
+		if (AsyncRead != null) {
+			if (AsyncRead.HasChanged ()) {
+				Debug.Log ("Read changed");
+				AsyncRead.Release ();
+				AsyncRead = null;
+				System.GC.Collect ();
+			} else
+				Debug.Log ("REad not changed");
+		}
+
+		if ( AsyncRead == null )
+			AsyncRead = PopReadPixels.ReadPixelsAsync2(DynamicTexture, OnTexturePixels);
+
+		System.GC.Collect ();
 	}
 }
