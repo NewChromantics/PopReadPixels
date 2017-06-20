@@ -16,4 +16,7 @@ Unity/**/holobuild/
 **/*.db
 **/*.opendb
 **/*.unitypackage
-PopEncodeJpeg.uwp/Release/
+
+PopReadPixels.Windows/Debug/
+PopReadPixels.Windows/x64/
+
