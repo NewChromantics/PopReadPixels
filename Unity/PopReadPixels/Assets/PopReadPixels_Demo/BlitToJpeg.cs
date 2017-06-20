@@ -42,16 +42,25 @@ public class BlitToJpeg : MonoBehaviour {
 		Graphics.Blit (null, DynamicTexture, DynamicShader);
 
 		if (AsyncRead != null) {
-			if (AsyncRead.HasChanged ()) {
+
+			//	trigger a read next time
+			AsyncRead.ReadAsync();
+
+			if (AsyncRead.HasChanged ())
+			{
 				Debug.Log ("Read changed");
 
+				//	realloc, or reuse
 				/*
 				AsyncRead.Release ();
 				AsyncRead = null;
 				System.GC.Collect ();
 				*/
-			} else
-				Debug.Log ("REad not changed");
+			}
+			else
+			{
+				Debug.Log ("Read not changed");
+			}
 		}
 
 		if ( AsyncRead == null )
