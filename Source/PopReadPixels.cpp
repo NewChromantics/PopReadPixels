@@ -18,6 +18,7 @@
 #include <SoyDirectx9.h>
 #endif
 
+#include <SoyPool.h>
 
 class TCache
 {
@@ -52,6 +53,16 @@ namespace PopReadPixels
 	TCache&		AllocCache(int& CacheIndex);
 	TCache&		GetCache(int CacheIndex);
 	void		ReleaseCache(uint32_t CacheIndex);
+
+
+	//	gr: probably need some proper cleanup for this
+#if defined(ENABLE_DIRECTX)
+	std::shared_ptr<TPool<Directx::TTexture>>	DirectxTexturePool;
+#endif
+
+#if defined(ENABLE_DIRECTX9)
+	std::shared_ptr<TPool<Directx9::TTexture>>	Directx9TexturePool;
+#endif
 }
 
 
@@ -89,8 +100,11 @@ int ReadPixelFromTexture(void* TexturePtr,SoyPixelsImpl& Pixels,SoyPixelsMeta Te
 #if defined(ENABLE_DIRECTX)
 	if ( DirectxContext )
 	{
+		if ( PopReadPixels::DirectxTexturePool == nullptr )
+			PopReadPixels::DirectxTexturePool.reset( new TPool<Directx::TTexture>() );
+
 		Directx::TTexture Texture( static_cast<ID3D11Texture2D*>(TexturePtr) );
-		Texture.Read( Pixels, *DirectxContext );
+		Texture.Read( Pixels, *DirectxContext, *PopReadPixels::DirectxTexturePool );
 		return 0;
 	}
 #endif
@@ -98,8 +112,11 @@ int ReadPixelFromTexture(void* TexturePtr,SoyPixelsImpl& Pixels,SoyPixelsMeta Te
 #if defined(ENABLE_DIRECTX9)
 	if ( Directx9Context )
 	{
+		if ( PopReadPixels::Directx9TexturePool == nullptr )
+			PopReadPixels::Directx9TexturePool.reset( new TPool<Directx9::TTexture>() );
+
 		Directx9::TTexture Texture( static_cast<IDirect3DTexture9*>(TexturePtr) );
-		Texture.Read( Pixels, *Directx9Context );
+		Texture.Read( Pixels, *Directx9Context, *PopReadPixels::Directx9TexturePool );
 		return 0;
 	}
 #endif
