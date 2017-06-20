@@ -38,9 +38,12 @@ public class BlitToJpeg : MonoBehaviour {
 		if (AsyncRead != null) {
 			if (AsyncRead.HasChanged ()) {
 				Debug.Log ("Read changed");
+
+				/*
 				AsyncRead.Release ();
 				AsyncRead = null;
 				System.GC.Collect ();
+				*/
 			} else
 				Debug.Log ("REad not changed");
 		}

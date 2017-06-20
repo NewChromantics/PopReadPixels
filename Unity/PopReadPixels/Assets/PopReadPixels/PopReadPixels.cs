@@ -6,17 +6,18 @@ using System.Text;
 using System.Collections.Generic;
 
 
-
 /// <summary>
 ///	Low level interface
 /// </summary>
 public static class PopReadPixels 
 {
-#if UNITY_EDITOR_OSX || UNITY_OSX
+#if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
 	private const string PluginName = "PopReadPixels_Osx";
 #elif UNITY_IOS
 	//private const string PluginName = "PopReadPixels_Ios";
 	private const string PluginName = "__Internal";
+#elif UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
+	private const string PluginName = "PopReadPixels";
 #else
 #error Unsupported platform
 #endif
@@ -35,20 +36,29 @@ public static class PopReadPixels
 
 
 	[DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
-	private static extern IntPtr		AllocCacheRenderTexture(IntPtr TexturePtr,byte[] PixelData,byte[] PixelRevision,byte[] CacheIndex,int PixelDataSize,int Width,int Height,int Channels,RenderTextureFormat PixelFormat);
+	private static extern int			AllocCacheRenderTexture(IntPtr TexturePtr,int Width,int Height,RenderTextureFormat PixelFormat);
 
 	[DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
-	private static extern IntPtr		AllocCacheTexture2D(IntPtr TexturePtr,byte[] PixelData,byte[] PixelRevision,byte[] CacheIndex,int PixelDataSize,int Width,int Height,int Channels,TextureFormat PixelFormat);
+	private static extern int			AllocCacheTexture2D(IntPtr TexturePtr,int Width,int Height,TextureFormat PixelFormat);
 
 	[DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
-	private static extern void			ReleaseCache(Byte Cache);
+	private static extern void			ReleaseCache(int Cache);
 
 	[DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
 	private static extern void			ReadPixelsFromCache(int Cache);
 
+	[DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
+	private static extern IntPtr		GetReadPixelsFromCacheFunc();
+
+	[DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
+	private static extern int			ReadPixelBytesFromCache(int Cache,byte[] ByteData,int ByteDataSize);
+
+
 
 	delegate void UnityRenderEvent(int EventId);
 
+
+	
 
 	class RenderEventJob
 	{
@@ -178,43 +188,41 @@ public static class PopReadPixels
 
 	public class JobCache
 	{
-		int			Channels;
-		byte[]		CacheIndex;
-		byte[]		Revision;
+		int?		CacheIndex = null;
+		int?		LastRevision = null;
+		int			Channels = 4;
 		byte[]		PixelBytes;
 		System.Action<byte[],int,string>	Callback;
 		IntPtr		TexturePtr;
+		IntPtr		PluginFunction;
 
 		public JobCache(RenderTexture texture,System.Action<byte[],int,string> _Callback)
 		{
-			Revision = new byte[1]{0};
-			CacheIndex = new byte[1]{255};
-			Channels = 4;
 			TexturePtr = texture.GetNativeTexturePtr();
+			CacheIndex = AllocCacheRenderTexture( TexturePtr, texture.width, texture.height, texture.format );
+			if ( CacheIndex == -1 )
+				throw new System.Exception("Failed to allocate cache index");
+
 			PixelBytes = new byte[texture.width * texture.height * Channels];
-			var PixelBytesLength = PixelBytes.Length;
-			var wh = new Vector2( texture.width, texture.height );
 			Callback = _Callback;
-			var PluginFunction = AllocCacheRenderTexture( TexturePtr, PixelBytes, Revision, CacheIndex, PixelBytesLength, texture.width, texture.height, Channels, texture.format );
-			if ( PluginFunction == System.IntPtr.Zero )
-				throw new System.Exception("Failed to allocated cache");	
-			GL.IssuePluginEvent( PluginFunction, CacheIndex[0] );
+			PluginFunction = GetReadPixelsFromCacheFunc();
 		}
 
 		public JobCache(Texture2D texture,System.Action<byte[],int,string> _Callback)
 		{
-			Revision = new byte[1]{0};
-			CacheIndex = new byte[1]{255};
-			Channels = 4;
 			TexturePtr = texture.GetNativeTexturePtr();
+			CacheIndex = AllocCacheTexture2D( TexturePtr, texture.width, texture.height, texture.format );
+			if ( CacheIndex == -1 )
+				throw new System.Exception("Failed to allocate cache index");
+
 			PixelBytes = new byte[texture.width * texture.height * Channels];
-			var PixelBytesLength = PixelBytes.Length;
-			var wh = new Vector2( texture.width, texture.height );
 			Callback = _Callback;
-			var PluginFunction = AllocCacheTexture2D( TexturePtr, PixelBytes, Revision, CacheIndex, PixelBytesLength, texture.width, texture.height, Channels, texture.format );
-			if ( PluginFunction == System.IntPtr.Zero )
-				throw new System.Exception("Failed to allocated cache");	
-			GL.IssuePluginEvent( PluginFunction, CacheIndex[0] );
+			PluginFunction = GetReadPixelsFromCacheFunc();
+		}
+
+		public void ReadAsync()
+		{
+			GL.IssuePluginEvent( PluginFunction, CacheIndex.Value );
 		}
 
 		protected virtual void Finalize()
@@ -224,15 +232,33 @@ public static class PopReadPixels
 
 		public bool	HasChanged()
 		{
-			var Changed = Revision[0] != 0;
-			if (Changed)
-				Callback.Invoke (PixelBytes, Channels, null);
-			return Changed;
+			if ( !this.CacheIndex.HasValue )
+				return false;
+
+			//	read & copy latest bytes
+			try
+			{
+				var Revision = ReadPixelBytesFromCache(this.CacheIndex.Value, PixelBytes, PixelBytes.Length);
+				if (Revision < 0)
+					throw new System.Exception("ReadPixelBytesFromCache returned " + Revision);
+
+				var Changed = LastRevision.HasValue ? (LastRevision.Value != Revision) : true;
+				if (Changed)
+					Callback.Invoke(PixelBytes, Channels, null);
+				LastRevision = Revision;
+				return Changed;
+			}
+			catch (System.Exception e)
+			{
+				Callback.Invoke (null, 0, e.Message);
+				return false;
+			}
 		}
 
 		public void	Release()
 		{
-			ReleaseCache( CacheIndex[0] );
+			if ( CacheIndex.HasValue )
+				ReleaseCache( CacheIndex.Value );
 		}
 	}
 
@@ -242,12 +268,14 @@ public static class PopReadPixels
 		if ( texture is RenderTexture )
 		{
 			var Job = new JobCache( texture as RenderTexture, Callback );
+			Job.ReadAsync();
 			return Job;
 		}
 
 		if ( texture is Texture2D )
 		{
 			var Job = new JobCache( texture as Texture2D, Callback );
+			Job.ReadAsync();
 			return Job;
 		}
 

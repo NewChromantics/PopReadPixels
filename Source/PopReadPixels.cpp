@@ -18,24 +18,27 @@
 #include <SoyDirectx9.h>
 #endif
 
+
 class TCache
 {
 public:
 	TCache() :
-		mTexturePtr	( nullptr )
+		mTexturePtr	( nullptr ),
+		mRevision	( 0 )
 	{
 	}
 	
 	bool			Used() const		{	return mTexturePtr != nullptr;	}
 	void			Release()			{	mTexturePtr = nullptr;	}
-	void			OnRead()			{	(*mPixelRevision)++;	}
+	void			OnRead()			{	mRevision++;	}
 	
 public:
 	void*			mTexturePtr;
-	uint8_t*		mPixelData;			//	c#
-	uint8_t*		mPixelRevision;		//	c#
-	uint32_t		mPixelDataSize;
 	SoyPixelsMeta	mTextureMeta;
+
+	uint32_t		mRevision;
+	SoyPixels		mLastReadPixels;
+	std::mutex		mLastReadPixelsLock;
 };
 
 
@@ -55,11 +58,8 @@ namespace PopReadPixels
 
 
 
-int ReadPixelFromTexture(void* TexturePtr,uint8_t* PixelData,int PixelDataSize,int* WidthHeightChannels,SoyPixelsMeta Meta)
+int ReadPixelFromTexture(void* TexturePtr,SoyPixelsImpl& Pixels,SoyPixelsMeta TextureMeta)
 {
-	WidthHeightChannels[2] = Meta.GetChannels();
-	SoyPixelsRemote Pixels( PixelData, PixelDataSize, Meta );
-
 #if defined(ENABLE_OPENGL)
 	auto OpenglContext = Unity::GetOpenglContextPtr();
 #endif
@@ -80,7 +80,7 @@ int ReadPixelFromTexture(void* TexturePtr,uint8_t* PixelData,int PixelDataSize,i
 		
 		//	assuming type atm... maybe we can extract it via opengl?
 		GLenum Type = GL_TEXTURE_2D;
-		Opengl::TTexture Texture( TexturePtr, Meta, Type );
+		Opengl::TTexture Texture( TexturePtr, TextureMeta, Type );
 		Texture.Read( Pixels );
 		return 0;
 	}
@@ -114,7 +114,8 @@ __export int ReadPixelFromTexture2D(void* TexturePtr,uint8_t* PixelData,int Pixe
 	try
 	{
 		SoyPixelsMeta Meta( WidthHeightChannels[0], WidthHeightChannels[1], Unity::GetPixelFormat( PixelFormat ) );
-		ReadPixelFromTexture( TexturePtr, PixelData, PixelDataSize, WidthHeightChannels, Meta );
+		SoyPixelsRemote Pixels( PixelData, PixelDataSize, Meta ); 
+		ReadPixelFromTexture( TexturePtr, Pixels, Meta );
 		return 0;
 	}
 	catch(const std::exception& e)
@@ -138,7 +139,8 @@ __export int ReadPixelFromRenderTexture(void* TexturePtr,uint8_t* PixelData,int 
 	try
 	{
 		SoyPixelsMeta Meta( WidthHeightChannels[0], WidthHeightChannels[1], Unity::GetPixelFormat( PixelFormat ) );
-		ReadPixelFromTexture( TexturePtr, PixelData, PixelDataSize, WidthHeightChannels, Meta );
+		SoyPixelsRemote Pixels( PixelData, PixelDataSize, Meta ); 
+		ReadPixelFromTexture( TexturePtr, Pixels, Meta );
 		return 0;
 	}
 	catch(const std::exception& e)
@@ -203,24 +205,21 @@ void PopReadPixels::ReleaseCache(uint32_t CacheIndex)
 }
 
 
-int AllocCacheRenderTexture(void* TexturePtr,uint8_t* PixelData,uint8_t* PixelRevision,int PixelDataSize,SoyPixelsMeta Meta)
+int AllocCacheRenderTexture(void* TexturePtr,SoyPixelsMeta Meta)
 {
 	int CacheIndex = -1;
 	auto& Cache = PopReadPixels::AllocCache(CacheIndex);
 	Cache.mTexturePtr = TexturePtr;
-	Cache.mPixelData = PixelData;
-	Cache.mPixelRevision = PixelRevision;
-	Cache.mPixelDataSize = PixelDataSize;
 	Cache.mTextureMeta = Meta;
 	return CacheIndex;
 }
 
-int AllocCacheRenderTexture(void* TexturePtr,uint8_t* PixelData,uint8_t* PixelRevision,int PixelDataSize,int Width,int Height,int Channels,Unity::RenderTexturePixelFormat::Type PixelFormat)
+__export int AllocCacheRenderTexture(void* TexturePtr,int Width,int Height,Unity::RenderTexturePixelFormat::Type PixelFormat)
 {
 	try
 	{
 		SoyPixelsMeta Meta( Width, Height, Unity::GetPixelFormat( PixelFormat ) );
-		return AllocCacheRenderTexture( TexturePtr, PixelData, PixelRevision, PixelDataSize, Meta );
+		return AllocCacheRenderTexture( TexturePtr, Meta );
 	}
 	catch(const std::exception& e)
 	{
@@ -238,12 +237,12 @@ int AllocCacheRenderTexture(void* TexturePtr,uint8_t* PixelData,uint8_t* PixelRe
 	}
 }
 
-int AllocCacheTexture2D(void* TexturePtr,uint8_t* PixelData,uint8_t* PixelRevision,int PixelDataSize,int Width,int Height,int Channels,Unity::Texture2DPixelFormat::Type PixelFormat)
+__export int AllocCacheTexture2D(void* TexturePtr,int Width,int Height,Unity::Texture2DPixelFormat::Type PixelFormat)
 {
 	try
 	{
 		SoyPixelsMeta Meta( Width, Height, Unity::GetPixelFormat( PixelFormat ) );
-		return AllocCacheRenderTexture( TexturePtr, PixelData, PixelRevision, PixelDataSize, Meta );
+		return AllocCacheRenderTexture( TexturePtr, Meta );
 	}
 	catch(const std::exception& e)
 	{
@@ -263,7 +262,7 @@ int AllocCacheTexture2D(void* TexturePtr,uint8_t* PixelData,uint8_t* PixelRevisi
 
 
 
-__export void ReleaseCache(uint8_t Cache)
+__export void ReleaseCache(int Cache)
 {
 	try
 	{
@@ -283,13 +282,14 @@ __export void ReleaseCache(uint8_t Cache)
 	}
 }
 
-__export UNITY_INTERFACE_API void ReadPixelsFromCache(int CacheIndex)
+void UNITY_INTERFACE_API ReadPixelsFromCache(int CacheIndex)
 {
 	try
 	{
 		auto& Cache = PopReadPixels::GetCache(CacheIndex);
-		int WidthHeightChannels[3];
-		ReadPixelFromTexture( Cache.mTexturePtr, Cache.mPixelData, Cache.mPixelDataSize, WidthHeightChannels, Cache.mTextureMeta );
+
+		std::lock_guard<std::mutex> Lock( Cache.mLastReadPixelsLock );
+		ReadPixelFromTexture( Cache.mTexturePtr, Cache.mLastReadPixels, Cache.mTextureMeta );
 		Cache.OnRead();
 	}
 	catch(const std::exception& e)
@@ -306,36 +306,35 @@ __export UNITY_INTERFACE_API void ReadPixelsFromCache(int CacheIndex)
 	}
 }
 
-
-__export UnityRenderingEvent AllocCacheRenderTexture(void* TexturePtr,uint8_t* PixelData,uint8_t* PixelRevision,uint8_t* CacheIndex,int PixelDataSize,int Width,int Height,int Channels,Unity::RenderTexturePixelFormat::Type PixelFormat)
+/*
+__export int AllocCacheRenderTexture(void* TexturePtr,int Width,int Height,Unity::RenderTexturePixelFormat::Type PixelFormat)
 {
 	try
 	{
-		auto CacheIndex32 = AllocCacheRenderTexture( TexturePtr, PixelData, PixelRevision, PixelDataSize, Width, Height, Channels, PixelFormat );
+		auto CacheIndex32 = AllocCacheRenderTexture( TexturePtr, Width, Height, PixelFormat );
 		if ( CacheIndex32 < 0 )
 			throw Soy::AssertException("Failed to alloc");
-		uint8_t CacheIndex8 = CacheIndex32;
-		*CacheIndex = CacheIndex8;
-		return ReadPixelsFromCache;
+		return CacheIndex32;
 	}
 	catch(const std::exception& e)
 	{
 		std::stringstream Error;
 		Error << "Exception in EnumStrings; " << e.what();
 		PopUnity::DebugLog( Error.str() );
-		return nullptr;
+		return -1;
 	}
 	catch(...)
 	{
 		std::stringstream Error;
 		Error << "Unknown exception in EnumStrings";
 		PopUnity::DebugLog( Error.str() );
-		return nullptr;
+		return -1;
 	}
 }
 
-
-__export UnityRenderingEvent AllocCacheTexture2D(void* TexturePtr,uint8_t* PixelData,uint8_t* PixelRevision,uint8_t* CacheIndex,int PixelDataSize,int Width,int Height,int Channels,Unity::Texture2DPixelFormat::Type PixelFormat)
+*/
+/*
+__export int AllocCacheTexture2D(void* TexturePtr,uint8_t* PixelData,uint8_t* PixelRevision,uint8_t* CacheIndex,int PixelDataSize,int Width,int Height,int Channels,Unity::Texture2DPixelFormat::Type PixelFormat)
 {
 	try
 	{
@@ -361,4 +360,39 @@ __export UnityRenderingEvent AllocCacheTexture2D(void* TexturePtr,uint8_t* Pixel
 		return nullptr;
 	}
 }
+*/
+
+__export UnityRenderingEvent GetReadPixelsFromCacheFunc()
+{
+	return ReadPixelsFromCache;
+}
+
+__export int ReadPixelBytesFromCache(int CacheIndex,uint8_t* ByteData,int ByteDataSize)
+{
+	try
+	{
+		auto& Cache = PopReadPixels::GetCache( CacheIndex );
+		std::lock_guard<std::mutex> Lock( Cache.mLastReadPixelsLock );
+		if ( !Cache.mLastReadPixels.IsValid() )
+			return -1;
+		auto ByteDataArray = GetRemoteArray( ByteData, static_cast<size_t>(ByteDataSize) );
+		ByteDataArray.Copy( Cache.mLastReadPixels.GetPixelsArray() );
+		return Cache.mRevision;
+	}
+	catch(const std::exception& e)
+	{
+		std::stringstream Error;
+		Error << "Exception in " << __func__ << " " << e.what();
+		PopUnity::DebugLog( Error.str() );
+		return -1;
+	}
+	catch(...)
+	{
+		std::stringstream Error;
+		Error << "Unknown exception in " << __func__;
+		PopUnity::DebugLog( Error.str() );
+		return -1;
+	}
+}
+
 

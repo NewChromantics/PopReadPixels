@@ -4,12 +4,15 @@
 #include <functional>
 
 
-__export int						ReadPixelFromRenderTexture(void* TexturePtr,uint8_t* PixelData,int PixelDataSize,int* WidthHeightChannels,Unity::RenderTexturePixelFormat::Type PixelFormat);
-__export int						ReadPixelFromTexture2D(void* TexturePtr,uint8_t* PixelData,int PixelDataSize,int* WidthHeightChannels,Unity::Texture2DPixelFormat::Type PixelFormat);
+__export int					ReadPixelFromRenderTexture(void* TexturePtr,uint8_t* PixelData,int PixelDataSize,int* WidthHeightChannels,Unity::RenderTexturePixelFormat::Type PixelFormat);
+__export int					ReadPixelFromTexture2D(void* TexturePtr,uint8_t* PixelData,int PixelDataSize,int* WidthHeightChannels,Unity::Texture2DPixelFormat::Type PixelFormat);
 
-__export UnityRenderingEvent		AllocCacheRenderTexture(void* TexturePtr,uint8_t* PixelData,uint8_t* PixelRevision,uint8_t* CacheIndex,int PixelDataSize,int Width,int Height,int Channels,Unity::RenderTexturePixelFormat::Type PixelFormat);
-__export UnityRenderingEvent		AllocCacheTexture2D(void* TexturePtr,uint8_t* PixelData,uint8_t* PixelRevision,uint8_t* CacheIndex,int PixelDataSize,int Width,int Height,int Channels,Unity::Texture2DPixelFormat::Type PixelFormat);
-__export void						ReleaseCache(uint8_t Cache);
-__export UNITY_INTERFACE_API void	ReadPixelsFromCache(int Cache);
+__export UnityRenderingEvent	GetReadPixelsFromCacheFunc();
+__export int					AllocCacheRenderTexture(void* TexturePtr,int Width,int Height,Unity::RenderTexturePixelFormat::Type PixelFormat);
+__export int					AllocCacheTexture2D(void* TexturePtr,int Width,int Height,Unity::Texture2DPixelFormat::Type PixelFormat);
+__export void					ReleaseCache(int Cache);
+ void UNITY_INTERFACE_API		ReadPixelsFromCache(int Cache);
+
+ __export int					ReadPixelBytesFromCache(int Cache,uint8_t* ByteData,int ByteDataSize);
 
 
