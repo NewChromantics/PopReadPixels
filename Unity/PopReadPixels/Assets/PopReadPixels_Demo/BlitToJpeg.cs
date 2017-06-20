@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 [System.Serializable]
@@ -12,6 +13,7 @@ public class BlitToJpeg : MonoBehaviour {
 	public RenderTexture	DynamicTexture;
 	public Material			DynamicShader;
 	public UnityEvent_Frame	OnPixelsRead;
+	public UnityEvent		OnPixelsError;
 
 	PopReadPixels.JobCache	AsyncRead;
 
@@ -21,13 +23,17 @@ public class BlitToJpeg : MonoBehaviour {
 		System.Action<byte[],int,string> OnTexturePixels = (Pixels, Channels, Error) => {
 
 			if (Error != null)
+			{
 				Debug.Log ("Read pixels: " + Error);
+				OnPixelsError.Invoke();
+			}
 
 			if (Pixels != null) {
 				try {
 					OnPixelsRead.Invoke (Pixels, new Vector2(DynamicTexture.width,DynamicTexture.height), Channels);
 				} catch (System.Exception e) {
 					Debug.LogException (e, this);
+					OnPixelsError.Invoke();
 				}
 			}
 
