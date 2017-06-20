@@ -12,7 +12,14 @@ using System.Collections.Generic;
 /// </summary>
 public static class PopReadPixels 
 {
-	private const string PluginName = "PopReadPixels";
+#if UNITY_EDITOR_OSX || UNITY_OSX
+	private const string PluginName = "PopReadPixels_Osx";
+#elif UNITY_IOS
+	//private const string PluginName = "PopReadPixels_Ios";
+	private const string PluginName = "__Internal";
+#else
+#error Unsupported platform
+#endif
 
 	[DllImport (PluginName, CallingConvention = CallingConvention.Cdecl)]
 	private static extern System.IntPtr	PopDebugString();
@@ -26,6 +33,18 @@ public static class PopReadPixels
 	[DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
 	private static extern int		ReadPixelFromTexture2D(IntPtr Texture,byte[] PixelData,int PixelDataSize,int[] WidthHeightChannels,TextureFormat PixelFormat);
 
+
+	[DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
+	private static extern IntPtr		AllocCacheRenderTexture(IntPtr TexturePtr,byte[] PixelData,byte[] PixelRevision,byte[] CacheIndex,int PixelDataSize,int Width,int Height,int Channels,RenderTextureFormat PixelFormat);
+
+	[DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
+	private static extern IntPtr		AllocCacheTexture2D(IntPtr TexturePtr,byte[] PixelData,byte[] PixelRevision,byte[] CacheIndex,int PixelDataSize,int Width,int Height,int Channels,TextureFormat PixelFormat);
+
+	[DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
+	private static extern void			ReleaseCache(Byte Cache);
+
+	[DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
+	private static extern void			ReadPixelsFromCache(int Cache);
 
 
 	delegate void UnityRenderEvent(int EventId);
@@ -154,6 +173,85 @@ public static class PopReadPixels
 		var EventId = JobCounter++;
 		var FunctionPtr = GetReadPixelsEventFunc (texture, Callback, EventId );
 		GL.IssuePluginEvent( FunctionPtr, EventId );
+	}
+
+
+	public class JobCache
+	{
+		int			Channels;
+		byte[]		CacheIndex;
+		byte[]		Revision;
+		byte[]		PixelBytes;
+		System.Action<byte[],int,string>	Callback;
+		IntPtr		TexturePtr;
+
+		public JobCache(RenderTexture texture,System.Action<byte[],int,string> _Callback)
+		{
+			Revision = new byte[1]{0};
+			CacheIndex = new byte[1]{255};
+			Channels = 4;
+			TexturePtr = texture.GetNativeTexturePtr();
+			PixelBytes = new byte[texture.width * texture.height * Channels];
+			var PixelBytesLength = PixelBytes.Length;
+			var wh = new Vector2( texture.width, texture.height );
+			Callback = _Callback;
+			var PluginFunction = AllocCacheRenderTexture( TexturePtr, PixelBytes, Revision, CacheIndex, PixelBytesLength, texture.width, texture.height, Channels, texture.format );
+			if ( PluginFunction == System.IntPtr.Zero )
+				throw new System.Exception("Failed to allocated cache");	
+			GL.IssuePluginEvent( PluginFunction, CacheIndex[0] );
+		}
+
+		public JobCache(Texture2D texture,System.Action<byte[],int,string> _Callback)
+		{
+			Revision = new byte[1]{0};
+			CacheIndex = new byte[1]{255};
+			Channels = 4;
+			TexturePtr = texture.GetNativeTexturePtr();
+			PixelBytes = new byte[texture.width * texture.height * Channels];
+			var PixelBytesLength = PixelBytes.Length;
+			var wh = new Vector2( texture.width, texture.height );
+			Callback = _Callback;
+			var PluginFunction = AllocCacheTexture2D( TexturePtr, PixelBytes, Revision, CacheIndex, PixelBytesLength, texture.width, texture.height, Channels, texture.format );
+			if ( PluginFunction == System.IntPtr.Zero )
+				throw new System.Exception("Failed to allocated cache");	
+			GL.IssuePluginEvent( PluginFunction, CacheIndex[0] );
+		}
+
+		protected virtual void Finalize()
+		{
+			Release();
+		}
+
+		public bool	HasChanged()
+		{
+			var Changed = Revision[0] != 0;
+			if (Changed)
+				Callback.Invoke (PixelBytes, Channels, null);
+			return Changed;
+		}
+
+		public void	Release()
+		{
+			ReleaseCache( CacheIndex[0] );
+		}
+	}
+
+	public static JobCache ReadPixelsAsync2(Texture texture,System.Action<byte[],int,string> Callback)
+	{
+		Debug.Log ("allocating");
+		if ( texture is RenderTexture )
+		{
+			var Job = new JobCache( texture as RenderTexture, Callback );
+			return Job;
+		}
+
+		if ( texture is Texture2D )
+		{
+			var Job = new JobCache( texture as Texture2D, Callback );
+			return Job;
+		}
+
+		throw new System.Exception("Texture type not handled");
 	}
 
 	public static void FlushDebug()

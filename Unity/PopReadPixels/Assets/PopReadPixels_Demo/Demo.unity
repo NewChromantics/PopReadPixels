@@ -522,4 +522,4 @@ MonoBehaviour:
   _hosts:
   - localhost:8081
   RetryTimeSecs: 5
-  SendFrameRate: 60
+  SendFrameRate: 20
