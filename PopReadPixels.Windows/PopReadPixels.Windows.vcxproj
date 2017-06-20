@@ -83,6 +83,9 @@
     <ClInclude Include="..\Source\Unity\IUnityGraphicsMetal.h" />
     <ClInclude Include="..\Source\Unity\IUnityInterface.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Unity\PopReadPixels\Assets\PopReadPixels\PopReadPixels.cs" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D3E8A495-934B-437E-AB4B-0C956F4E24B4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

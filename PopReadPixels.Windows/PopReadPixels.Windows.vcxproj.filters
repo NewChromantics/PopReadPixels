@@ -14,6 +14,9 @@
     <Filter Include="Source Files\SoyLib\glew">
       <UniqueIdentifier>{55f7b4d7-6f72-4d4b-8510-2d9158ed96ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="c# Source">
+      <UniqueIdentifier>{a8c72ce1-f4f1-42d1-936b-a8ea99fe215c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\PopDebug.cpp">
@@ -201,5 +204,10 @@
     <ClInclude Include="..\Source\SoyLib\src\SoyMediaFormat.h">
       <Filter>Source Files\SoyLib</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Unity\PopReadPixels\Assets\PopReadPixels\PopReadPixels.cs">
+      <Filter>c# Source</Filter>
+    </None>
   </ItemGroup>
 </Project>
