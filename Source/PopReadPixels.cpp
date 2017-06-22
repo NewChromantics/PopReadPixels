@@ -299,7 +299,8 @@ __export void ReleaseCache(int Cache)
 	}
 }
 
-void UNITY_INTERFACE_API ReadPixelsFromCache(int CacheIndex)
+
+__export void ReadPixelsFromCache(int CacheIndex)
 {
 	try
 	{
