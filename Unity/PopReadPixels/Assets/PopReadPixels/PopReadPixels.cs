@@ -120,11 +120,13 @@ public static class PopReadPixels
 
 	public static IntPtr GetReadPixelsEventFunc(Texture texture,System.Action<byte[],Vector2,int,string> Callback,int JobEventId)
 	{
+		#if UNITY_EDITOR
 		//	when the editor stops, the static references are cleaned up, before the render thread is finished using it below
 		if (!AddedPlaymodeStateChangedFunc) {
 			UnityEditor.EditorApplication.playmodeStateChanged += KeepAlivePendingJobs;
 			AddedPlaymodeStateChangedFunc = true;
 		}
+		#endif
 
 		//	must be called on main thread... but causes GPU system. need to cache
 		var TexturePtr = texture.GetNativeTexturePtr();
