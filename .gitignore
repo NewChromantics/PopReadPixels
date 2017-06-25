@@ -20,3 +20,16 @@ Unity/**/holobuild/
 PopReadPixels.Windows/Debug/
 PopReadPixels.Windows/x64/
 
+iosbuild/
+
+PopReadPixels\.Android/build\.xml
+
+PopReadPixels\.Android/proguard-project\.txt
+
+PopReadPixels\.Android/local\.properties
+
+PopReadPixels\.Android/project\.properties
+
+PopReadPixels\.Android/libs/
+
+PopReadPixels\.Android/obj/
