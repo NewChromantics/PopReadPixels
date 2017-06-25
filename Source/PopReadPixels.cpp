@@ -138,14 +138,14 @@ __export int ReadPixelFromTexture2D(void* TexturePtr,uint8_t* PixelData,int Pixe
 	catch(const std::exception& e)
 	{
 		std::stringstream Error;
-		Error << "Exception in EnumStrings; " << e.what();
+		Error << "Exception in " << __func__ << "; " << e.what();
 		PopUnity::DebugLog( Error.str() );
 		return -1;
 	}
 	catch(...)
 	{
 		std::stringstream Error;
-		Error << "Unknown exception in EnumStrings";
+		Error << "Unknown exception in " << __func__;
 		PopUnity::DebugLog( Error.str() );
 		return -1;
 	}
@@ -163,14 +163,14 @@ __export int ReadPixelFromRenderTexture(void* TexturePtr,uint8_t* PixelData,int 
 	catch(const std::exception& e)
 	{
 		std::stringstream Error;
-		Error << "Exception in EnumStrings; " << e.what();
+		Error << "Exception in " << __func__ << "; " << e.what();
 		PopUnity::DebugLog( Error.str() );
 		return -1;
 	}
 	catch(...)
 	{
 		std::stringstream Error;
-		Error << "Unknown exception in EnumStrings";
+		Error << "Unknown exception in " << __func__ ;
 		PopUnity::DebugLog( Error.str() );
 		return -1;
 	}
@@ -241,14 +241,14 @@ __export int AllocCacheRenderTexture(void* TexturePtr,int Width,int Height,Unity
 	catch(const std::exception& e)
 	{
 		std::stringstream Error;
-		Error << "Exception in EnumStrings; " << e.what();
+		Error << "Exception in " << __func__ << "; " << e.what();
 		PopUnity::DebugLog( Error.str() );
 		return -1;
 	}
 	catch(...)
 	{
 		std::stringstream Error;
-		Error << "Unknown exception in EnumStrings";
+		Error << "Unknown exception in " << __func__ << "";
 		PopUnity::DebugLog( Error.str() );
 		return -1;
 	}
@@ -264,14 +264,14 @@ __export int AllocCacheTexture2D(void* TexturePtr,int Width,int Height,Unity::Te
 	catch(const std::exception& e)
 	{
 		std::stringstream Error;
-		Error << "Exception in EnumStrings; " << e.what();
+		Error << "Exception in " << __func__ << "; " << e.what();
 		PopUnity::DebugLog( Error.str() );
 		return -1;
 	}
 	catch(...)
 	{
 		std::stringstream Error;
-		Error << "Unknown exception in EnumStrings";
+		Error << "Unknown exception in " << __func__ << "";
 		PopUnity::DebugLog( Error.str() );
 		return -1;
 	}
@@ -288,13 +288,13 @@ __export void ReleaseCache(int Cache)
 	catch(const std::exception& e)
 	{
 		std::stringstream Error;
-		Error << "Exception in EnumStrings; " << e.what();
+		Error << "Exception in " << __func__ << "; " << e.what();
 		PopUnity::DebugLog( Error.str() );
 	}
 	catch(...)
 	{
 		std::stringstream Error;
-		Error << "Unknown exception in EnumStrings";
+		Error << "Unknown exception in " << __func__ << "";
 		PopUnity::DebugLog( Error.str() );
 	}
 }
@@ -304,6 +304,7 @@ __export void ReadPixelsFromCache(int CacheIndex)
 {
 	try
 	{
+		std::Debug << "ReadPixelsFromCache(" << CacheIndex << ")" << std::endl;
 		auto& Cache = PopReadPixels::GetCache(CacheIndex);
 
 		std::lock_guard<std::mutex> Lock( Cache.mLastReadPixelsLock );
@@ -313,13 +314,13 @@ __export void ReadPixelsFromCache(int CacheIndex)
 	catch(const std::exception& e)
 	{
 		std::stringstream Error;
-		Error << "Exception in EnumStrings; " << e.what();
+		Error << "Exception in " << __func__ << "; " << e.what();
 		PopUnity::DebugLog( Error.str() );
 	}
 	catch(...)
 	{
 		std::stringstream Error;
-		Error << "Unknown exception in EnumStrings";
+		Error << "Unknown exception in " << __func__ << "";
 		PopUnity::DebugLog( Error.str() );
 	}
 }

@@ -17,6 +17,9 @@ namespace PopUnity
 template<typename STRING>
 inline void PopUnity::DebugLog(const STRING& String)
 {
+	//	pump out to the OS output too via soylib
+	Platform::DebugPrint(String);
+	
 	auto& DebugStrings = GetDebugStrings();
 	DebugStrings.Push( String );
 }

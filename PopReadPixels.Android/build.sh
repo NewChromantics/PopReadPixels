@@ -1,5 +1,8 @@
 #!/bin/sh
 
+echo "env vars"
+env
+
 # require param
 ACTION="$1"
 

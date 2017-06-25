@@ -142,6 +142,7 @@
 		BF79DF0C1F002A4C00DADD2F /* SoyStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyStream.cpp; path = src/SoyStream.cpp; sourceTree = "<group>"; };
 		BF79DF0D1F002A4C00DADD2F /* SoyStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyStream.h; path = src/SoyStream.h; sourceTree = "<group>"; };
 		BF79DF101F002C8400DADD2F /* Android.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Android.xcconfig; path = Android/Android.xcconfig; sourceTree = "<group>"; };
+		BF79DF111F0034AF00DADD2F /* SoyDebug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SoyDebug.h; path = src/SoyDebug.h; sourceTree = "<group>"; };
 		BFD607741EA16F0A0035C814 /* IUnityGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUnityGraphics.h; path = Source/Unity/IUnityGraphics.h; sourceTree = "<group>"; };
 		BFD607751EA16F0A0035C814 /* IUnityGraphicsD3D9.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUnityGraphicsD3D9.h; path = Source/Unity/IUnityGraphicsD3D9.h; sourceTree = "<group>"; };
 		BFD607761EA16F0A0035C814 /* IUnityGraphicsD3D11.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUnityGraphicsD3D11.h; path = Source/Unity/IUnityGraphicsD3D11.h; sourceTree = "<group>"; };
@@ -216,6 +217,7 @@
 				BF5A5A331EE46B50006A0152 /* SoyAssert.cpp */,
 				BF5A5A341EE46B50006A0152 /* SoyDebug.cpp */,
 				BF5A5A351EE46B50006A0152 /* SoyDebug.mm */,
+				BF79DF111F0034AF00DADD2F /* SoyDebug.h */,
 				BF5A5A451EE46BC6006A0152 /* SoyPng.cpp */,
 				BF5A5A461EE46BC6006A0152 /* SoyPng.h */,
 				BF5A5A3C1EE46B7D006A0152 /* SoyGraphics.cpp */,
