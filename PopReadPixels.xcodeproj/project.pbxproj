@@ -61,6 +61,8 @@
 		BF5A5A471EE46BC6006A0152 /* SoyPng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A451EE46BC6006A0152 /* SoyPng.cpp */; };
 		BF5A5A491EE46BFD006A0152 /* SoyUnity.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF5A5A481EE46BFD006A0152 /* SoyUnity.mm */; };
 		BF5A5A4B1EE46C18006A0152 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5A5A4A1EE46C18006A0152 /* CoreMedia.framework */; };
+		BF79DF0E1F002A4C00DADD2F /* SoyStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF79DF0C1F002A4C00DADD2F /* SoyStream.cpp */; };
+		BF79DF0F1F002A4C00DADD2F /* SoyStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF79DF0C1F002A4C00DADD2F /* SoyStream.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -136,6 +138,10 @@
 		BF5A5A461EE46BC6006A0152 /* SoyPng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyPng.h; path = src/SoyPng.h; sourceTree = "<group>"; };
 		BF5A5A481EE46BFD006A0152 /* SoyUnity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoyUnity.mm; path = src/SoyUnity.mm; sourceTree = "<group>"; };
 		BF5A5A4A1EE46C18006A0152 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		BF79DF0B1F00252C00DADD2F /* PopReadPixels.Android */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PopReadPixels.Android; sourceTree = SOURCE_ROOT; };
+		BF79DF0C1F002A4C00DADD2F /* SoyStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyStream.cpp; path = src/SoyStream.cpp; sourceTree = "<group>"; };
+		BF79DF0D1F002A4C00DADD2F /* SoyStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyStream.h; path = src/SoyStream.h; sourceTree = "<group>"; };
+		BF79DF101F002C8400DADD2F /* Android.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Android.xcconfig; path = Android/Android.xcconfig; sourceTree = "<group>"; };
 		BFD607741EA16F0A0035C814 /* IUnityGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUnityGraphics.h; path = Source/Unity/IUnityGraphics.h; sourceTree = "<group>"; };
 		BFD607751EA16F0A0035C814 /* IUnityGraphicsD3D9.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUnityGraphicsD3D9.h; path = Source/Unity/IUnityGraphicsD3D9.h; sourceTree = "<group>"; };
 		BFD607761EA16F0A0035C814 /* IUnityGraphicsD3D11.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUnityGraphicsD3D11.h; path = Source/Unity/IUnityGraphicsD3D11.h; sourceTree = "<group>"; };
@@ -204,6 +210,8 @@
 		BF5A5A101EE46928006A0152 /* SoyLib */ = {
 			isa = PBXGroup;
 			children = (
+				BF79DF0C1F002A4C00DADD2F /* SoyStream.cpp */,
+				BF79DF0D1F002A4C00DADD2F /* SoyStream.h */,
 				BF5A5A321EE46B50006A0152 /* SoyArray.cpp */,
 				BF5A5A331EE46B50006A0152 /* SoyAssert.cpp */,
 				BF5A5A341EE46B50006A0152 /* SoyDebug.cpp */,
@@ -250,9 +258,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BF79DF091F00243E00DADD2F /* Android */ = {
+			isa = PBXGroup;
+			children = (
+				BF79DF101F002C8400DADD2F /* Android.xcconfig */,
+				BF79DF0B1F00252C00DADD2F /* PopReadPixels.Android */,
+			);
+			name = Android;
+			sourceTree = "<group>";
+		};
 		BFD6076D1EA16ED20035C814 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BF79DF091F00243E00DADD2F /* Android */,
 				BF5A5A101EE46928006A0152 /* SoyLib */,
 				BF5A59FA1EE43719006A0152 /* PopDebug.cpp */,
 				BF5A59FB1EE43719006A0152 /* PopDebug.hpp */,
@@ -284,6 +302,23 @@
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		BF79DF061F0020F100DADD2F /* PopReadPixels_Android */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = BF79DF081F0020F100DADD2F /* Build configuration list for PBXLegacyTarget "PopReadPixels_Android" */;
+			buildPhases = (
+			);
+			buildToolPath = ../PopReadPixels.Android/build.sh;
+			buildWorkingDirectory = "$(SRCROOT)/PopReadPixels.Android/";
+			dependencies = (
+			);
+			name = PopReadPixels_Android;
+			passBuildSettingsInEnvironment = 1;
+			productName = PopReadPixels_Android;
+		};
+/* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
 		BF44DA401EE9C1B900A7A53C /* PopReadPixels_Ios */ = {
@@ -338,6 +373,10 @@
 						CreatedOnToolsVersion = 8.1;
 						ProvisioningStyle = Automatic;
 					};
+					BF79DF061F0020F100DADD2F = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = BF4A6A0F1EA16D7C00613A64 /* Build configuration list for PBXProject "PopReadPixels" */;
@@ -354,6 +393,7 @@
 			targets = (
 				BF4A6A131EA16D7C00613A64 /* PopReadPixels_Osx */,
 				BF44DA401EE9C1B900A7A53C /* PopReadPixels_Ios */,
+				BF79DF061F0020F100DADD2F /* PopReadPixels_Android */,
 			);
 		};
 /* End PBXProject section */
@@ -382,6 +422,7 @@
 				BF44DA5D1EE9C1FD00A7A53C /* SoyPixels.cpp in Sources */,
 				BF44DA551EE9C1FD00A7A53C /* SoyTypes.cpp in Sources */,
 				BF44DA521EE9C1FD00A7A53C /* SoyShader.cpp in Sources */,
+				BF79DF0F1F002A4C00DADD2F /* SoyStream.cpp in Sources */,
 				BF44DA5C1EE9C1FD00A7A53C /* SoyOpenglContext.cpp in Sources */,
 				BF44DA4F1EE9C1FD00A7A53C /* SoyEvent.cpp in Sources */,
 				BF44DA4E1EE9C1FD00A7A53C /* SoyGraphics.cpp in Sources */,
@@ -414,6 +455,7 @@
 				BF5A5A1F1EE46ACF006A0152 /* SoyThread.cpp in Sources */,
 				BF5A5A021EE43719006A0152 /* PopDebug.cpp in Sources */,
 				BF5A5A201EE46ACF006A0152 /* SoyTime.cpp in Sources */,
+				BF79DF0E1F002A4C00DADD2F /* SoyStream.cpp in Sources */,
 				BF5A5A031EE43719006A0152 /* PopUnity.cpp in Sources */,
 				BF5A5A2F1EE46B13006A0152 /* SoyString.mm in Sources */,
 				BF5A5A381EE46B50006A0152 /* SoyAssert.cpp in Sources */,
@@ -506,6 +548,17 @@
 			};
 			name = Release;
 		};
+		BF79DF071F0020F100DADD2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF79DF101F002C8400DADD2F /* Android.xcconfig */;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -515,6 +568,7 @@
 				BF44DA471EE9C1B900A7A53C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BF4A6A0F1EA16D7C00613A64 /* Build configuration list for PBXProject "PopReadPixels" */ = {
 			isa = XCConfigurationList;
@@ -531,6 +585,13 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		BF79DF081F0020F100DADD2F /* Build configuration list for PBXLegacyTarget "PopReadPixels_Android" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF79DF071F0020F100DADD2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
