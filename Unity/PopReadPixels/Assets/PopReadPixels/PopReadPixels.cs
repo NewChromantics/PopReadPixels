@@ -16,6 +16,8 @@ public static class PopReadPixels
 #elif UNITY_IOS
 	//private const string PluginName = "PopReadPixels_Ios";
 	private const string PluginName = "__Internal";
+#elif UNITY_ANDROID
+	private const string PluginName = "PopReadPixels";
 #elif UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 	private const string PluginName = "PopReadPixels";
 #else
