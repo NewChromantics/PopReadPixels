@@ -64,8 +64,8 @@ public class BlitToJpeg : MonoBehaviour {
 		}
 
 		if ( AsyncRead == null )
-			AsyncRead = PopReadPixels.ReadPixelsAsync2(DynamicTexture, OnTexturePixels);
+			AsyncRead = PopReadPixels.ReadPixelsAsync(DynamicTexture, OnTexturePixels);
 
-		System.GC.Collect ();
+		PopReadPixels.FlushDebug ();
 	}
 }
