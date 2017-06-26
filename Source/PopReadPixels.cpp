@@ -300,7 +300,7 @@ __export void ReleaseCache(int Cache)
 }
 
 
-__export void ReadPixelsFromCache(int CacheIndex)
+__api(void) ReadPixelsFromCache(int CacheIndex)
 {
 	try
 	{

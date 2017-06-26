@@ -7,8 +7,10 @@
 #include "Unity/IUnityGraphics.h"
 
 #if defined(TARGET_WINDOWS)
+#define __api(returntype)	returntype __stdcall 
 #define __export			extern "C" __declspec(dllexport)
 #elif defined(TARGET_OSX)
+#define __api(returntype)	extern "C" returntype
 #define __export			extern "C"
 #endif
 
