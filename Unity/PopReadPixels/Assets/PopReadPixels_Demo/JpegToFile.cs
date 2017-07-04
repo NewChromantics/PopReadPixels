@@ -35,8 +35,15 @@ public class JpegToFile : MonoBehaviour {
 
 		//	async
 		System.Threading.ThreadPool.QueueUserWorkItem ((WorkItem) => {
-			var Jpeg = PopEncodeJpeg.EncodeToJpeg( Pixels, (int)Size.x, (int)Size.y, Channels, true ); 
-			System.IO.File.WriteAllBytes( NextFilename, Jpeg );
+			try
+			{
+				var Jpeg = PopEncodeJpeg.EncodeToJpeg( Pixels, (int)Size.x, (int)Size.y, Channels, false ); 
+				System.IO.File.WriteAllBytes( NextFilename, Jpeg );
+			}
+			catch(System.Exception e)
+			{
+				Debug.LogException(e);
+			}
 		}
 		);
 
