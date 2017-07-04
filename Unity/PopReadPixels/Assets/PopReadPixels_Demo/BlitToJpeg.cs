@@ -48,7 +48,7 @@ public class BlitToJpeg : MonoBehaviour {
 
 			if (AsyncRead.HasChanged ())
 			{
-				Debug.Log ("Read changed");
+				//Debug.Log ("Read changed");
 
 				//	realloc, or reuse
 				/*
