@@ -13,7 +13,7 @@ RenderTexture:
   m_Height: 1024
   m_AntiAliasing: 1
   m_DepthFormat: 0
-  m_ColorFormat: 0
+  m_ColorFormat: 11
   m_MipMap: 0
   m_GenerateMips: 1
   m_SRGB: 0
@@ -22,5 +22,3 @@ RenderTexture:
     m_Aniso: 0
     m_MipBias: 0
     m_WrapMode: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1

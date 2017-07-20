@@ -10,20 +10,34 @@ Material:
   m_Shader: {fileID: 4800000, guid: 9c41333784cd64b52a63bd4a277574fa, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
   m_SavedProperties:
-    serializedVersion: 3
+    serializedVersion: 2
     m_TexEnvs:
-    - _MainTex:
+    - first:
+        name: <noninit>
+      second:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - GridSize: 6.9
-    - TimeSpeed: 1.09
+    - first:
+        name: <noninit>
+      second: 0
+    - first:
+        name: GridSize
+      second: 10
+    - first:
+        name: TimeSpeed
+      second: 0.5
     m_Colors:
-    - ColourA: {r: 0.21020764, g: 0.23882586, b: 0.5294118, a: 1}
-    - ColourB: {r: 0.7939566, g: 0.9117647, b: 0.2547578, a: 1}
+    - first:
+        name: <noninit>
+      second: {r: 0, g: 1, b: 0, a: NaN}
+    - first:
+        name: ColourA
+      second: {r: 0.89705884, g: 0.63549244, b: 0.07255624, a: 1}
+    - first:
+        name: ColourB
+      second: {r: 0.5521715, g: 0.43966264, b: 0.78676474, a: 1}
