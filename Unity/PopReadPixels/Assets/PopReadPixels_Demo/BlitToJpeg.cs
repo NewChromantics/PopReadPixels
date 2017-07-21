@@ -7,20 +7,26 @@ using UnityEngine.Events;
 [System.Serializable]
 public class UnityEvent_Frame : UnityEngine.Events.UnityEvent <byte[],Vector2,int> {}
 
+[System.Serializable]
+public class UnityEvent_FrameFloat : UnityEngine.Events.UnityEvent <float[],Vector2,int> {}
+
 
 public class BlitToJpeg : MonoBehaviour {
+
+	public bool				ReadAsFloat = false;
 
 	public RenderTexture	DynamicTexture;
 	public Material			DynamicShader;
 	public UnityEvent_Frame	OnPixelsRead;
+	public UnityEvent_FrameFloat	OnPixelsFloatRead;
 	public UnityEvent		OnPixelsError;
 
 	PopReadPixels.JobCache	AsyncRead;
 
 	void Update () {
-		
 
-		System.Action<byte[],int,string> OnTexturePixels = (Pixels, Channels, Error) => {
+
+		System.Action<byte[],int,string> OnTextureBytePixels = (Pixels, Channels, Error) => {
 
 			if (Error != null)
 			{
@@ -31,6 +37,25 @@ public class BlitToJpeg : MonoBehaviour {
 			if (Pixels != null) {
 				try {
 					OnPixelsRead.Invoke (Pixels, new Vector2(DynamicTexture.width,DynamicTexture.height), Channels);
+				} catch (System.Exception e) {
+					Debug.LogException (e, this);
+					OnPixelsError.Invoke();
+				}
+			}
+
+		};
+
+		System.Action<float[],int,string> OnTextureFloatPixels = (Pixels, Channels, Error) => {
+
+			if (Error != null)
+			{
+				Debug.Log ("Read pixels: " + Error);
+				OnPixelsError.Invoke();
+			}
+
+			if (Pixels != null) {
+				try {
+					OnPixelsFloatRead.Invoke (Pixels, new Vector2(DynamicTexture.width,DynamicTexture.height), Channels);
 				} catch (System.Exception e) {
 					Debug.LogException (e, this);
 					OnPixelsError.Invoke();
@@ -64,7 +89,12 @@ public class BlitToJpeg : MonoBehaviour {
 		}
 
 		if ( AsyncRead == null )
-			AsyncRead = PopReadPixels.ReadPixelsAsync(DynamicTexture, OnTexturePixels);
+		{
+			if ( ReadAsFloat )
+				AsyncRead = PopReadPixels.ReadPixelsAsync(DynamicTexture, OnTextureFloatPixels);
+			else
+				AsyncRead = PopReadPixels.ReadPixelsAsync(DynamicTexture, OnTextureBytePixels);
+		}
 
 		PopReadPixels.FlushDebug ();
 	}

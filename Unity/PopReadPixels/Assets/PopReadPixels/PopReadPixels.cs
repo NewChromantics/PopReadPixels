@@ -38,10 +38,10 @@ public static class PopReadPixels
 
 
 	[DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
-	private static extern int			AllocCacheRenderTexture(IntPtr TexturePtr,int Width,int Height,RenderTextureFormat PixelFormat);
+	private static extern int			AllocCacheRenderTexture(IntPtr TexturePtr,int Width,int Height,bool ReadAsFloat,RenderTextureFormat PixelFormat);
 
 	[DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
-	private static extern int			AllocCacheTexture2D(IntPtr TexturePtr,int Width,int Height,TextureFormat PixelFormat);
+	private static extern int			AllocCacheTexture2D(IntPtr TexturePtr,int Width,int Height,bool ReadAsFloat,TextureFormat PixelFormat);
 
 	[DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
 	private static extern void			ReleaseCache(int Cache);
@@ -55,6 +55,9 @@ public static class PopReadPixels
 	[DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
 	private static extern int			ReadPixelBytesFromCache(int Cache,byte[] ByteData,int ByteDataSize);
 
+	[DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
+	private static extern int			ReadPixelFloatsFromCache(int Cache,float[] ByteData,int ByteDataSize);
+
 
 
 
@@ -64,33 +67,61 @@ public static class PopReadPixels
 		int?		LastRevision = null;
 		int			Channels = 4;
 		byte[]		PixelBytes;
-		System.Action<byte[],int,string>	Callback;
+		System.Action<byte[],int,string>	ByteCallback;
+
+		float[]		PixelFloats;
+		System.Action<float[],int,string>	FloatCallback;
 		IntPtr		TexturePtr;
 		IntPtr		PluginFunction;
 
 		public JobCache(RenderTexture texture,System.Action<byte[],int,string> _Callback)
 		{
 			TexturePtr = texture.GetNativeTexturePtr();
-			CacheIndex = AllocCacheRenderTexture( TexturePtr, texture.width, texture.height, texture.format );
+			CacheIndex = AllocCacheRenderTexture( TexturePtr, texture.width, texture.height, false, texture.format );
 			if ( CacheIndex == -1 )
 				throw new System.Exception("Failed to allocate cache index");
 
 			PixelBytes = new byte[texture.width * texture.height * Channels];
-			Callback = _Callback;
+			ByteCallback = _Callback;
 			PluginFunction = GetReadPixelsFromCacheFunc();
 		}
 
 		public JobCache(Texture2D texture,System.Action<byte[],int,string> _Callback)
 		{
 			TexturePtr = texture.GetNativeTexturePtr();
-			CacheIndex = AllocCacheTexture2D( TexturePtr, texture.width, texture.height, texture.format );
+			CacheIndex = AllocCacheTexture2D( TexturePtr, texture.width, texture.height, false, texture.format );
 			if ( CacheIndex == -1 )
 				throw new System.Exception("Failed to allocate cache index");
 
 			PixelBytes = new byte[texture.width * texture.height * Channels];
-			Callback = _Callback;
+			ByteCallback = _Callback;
 			PluginFunction = GetReadPixelsFromCacheFunc();
 		}
+
+		public JobCache(RenderTexture texture,System.Action<float[],int,string> _Callback)
+		{
+			TexturePtr = texture.GetNativeTexturePtr();
+			CacheIndex = AllocCacheRenderTexture( TexturePtr, texture.width, texture.height, true, texture.format );
+			if ( CacheIndex == -1 )
+				throw new System.Exception("Failed to allocate cache index");
+
+			PixelFloats = new float[texture.width * texture.height * Channels];
+			FloatCallback = _Callback;
+			PluginFunction = GetReadPixelsFromCacheFunc();
+		}
+
+		public JobCache(Texture2D texture,System.Action<float[],int,string> _Callback)
+		{
+			TexturePtr = texture.GetNativeTexturePtr();
+			CacheIndex = AllocCacheTexture2D( TexturePtr, texture.width, texture.height, true, texture.format );
+			if ( CacheIndex == -1 )
+				throw new System.Exception("Failed to allocate cache index");
+
+			PixelFloats = new float[texture.width * texture.height * Channels];
+			FloatCallback = _Callback;
+			PluginFunction = GetReadPixelsFromCacheFunc();
+		}
+
 
 		public void ReadAsync()
 		{
@@ -110,19 +141,38 @@ public static class PopReadPixels
 			//	read & copy latest bytes
 			try
 			{
-				var Revision = ReadPixelBytesFromCache(this.CacheIndex.Value, PixelBytes, PixelBytes.Length);
-				if (Revision < 0)
-					throw new System.Exception("ReadPixelBytesFromCache returned " + Revision);
+				int Revision = -1;
+
+				if ( PixelBytes != null )
+				{
+					Revision = ReadPixelBytesFromCache(this.CacheIndex.Value, PixelBytes, PixelBytes.Length);
+					if (Revision < 0)
+						throw new System.Exception("ReadPixelBytesFromCache returned " + Revision);
+				}
+				if ( PixelFloats != null )
+				{
+					Revision = ReadPixelFloatsFromCache(this.CacheIndex.Value, PixelFloats, PixelFloats.Length);
+					if (Revision < 0)
+						throw new System.Exception("ReadPixelFloatsFromCache returned " + Revision);
+				}
 
 				var Changed = LastRevision.HasValue ? (LastRevision.Value != Revision) : true;
 				if (Changed)
-					Callback.Invoke(PixelBytes, Channels, null);
+				{
+					if ( ByteCallback != null )
+						ByteCallback.Invoke(PixelBytes, Channels, null);
+					if ( FloatCallback != null )
+						FloatCallback.Invoke(PixelFloats, Channels, null);
+				}
 				LastRevision = Revision;
 				return Changed;
 			}
 			catch (System.Exception e)
 			{
-				Callback.Invoke (null, 0, e.Message);
+				if ( ByteCallback != null )
+					ByteCallback.Invoke (null, 0, e.Message);
+				if ( FloatCallback != null )
+					FloatCallback.Invoke (null, 0, e.Message);
 				return false;
 			}
 		}
@@ -154,6 +204,25 @@ public static class PopReadPixels
 		throw new System.Exception("Texture type not handled");
 	}
 
+	public static JobCache ReadPixelsAsync(Texture texture,System.Action<float[],int,string> Callback)
+	{
+		Debug.Log ("allocating");
+		if ( texture is RenderTexture )
+		{
+			var Job = new JobCache( texture as RenderTexture, Callback );
+			Job.ReadAsync();
+			return Job;
+		}
+
+		if ( texture is Texture2D )
+		{
+			var Job = new JobCache( texture as Texture2D, Callback );
+			Job.ReadAsync();
+			return Job;
+		}
+
+		throw new System.Exception("Texture type not handled");
+	}
 	public static void FlushDebug()
 	{
 		FlushDebug ((str)=>
@@ -166,7 +235,7 @@ public static class PopReadPixels
 	public static void FlushDebug(System.Action<string> Callback)
 	{
 		//	gr: this func is crashing unity. But I can't figure out why.
-		/*
+		
 		int MaxFlushPerFrame = 100;
 		int i = 0;
 		while (i++ < MaxFlushPerFrame)
@@ -197,7 +266,7 @@ public static class PopReadPixels
 				throw;
 			}
 		}
-	*/
+
 	}
 
 }

@@ -222,21 +222,23 @@ void PopReadPixels::ReleaseCache(uint32_t CacheIndex)
 }
 
 
-int AllocCacheRenderTexture(void* TexturePtr,SoyPixelsMeta Meta)
+
+int AllocCacheRenderTexture(void* TexturePtr,SoyPixelsMeta Meta,bool ReadAsFloat)
 {
 	int CacheIndex = -1;
 	auto& Cache = PopReadPixels::AllocCache(CacheIndex);
 	Cache.mTexturePtr = TexturePtr;
 	Cache.mTextureMeta = Meta;
+	Cache.mTextureMeta.DumbSetFormat( ReadAsFloat ? SoyPixelsFormat::GetFloatFormat(Meta.GetFormat()) : SoyPixelsFormat::GetByteFormat(Meta.GetFormat()) );
 	return CacheIndex;
 }
 
-__export int AllocCacheRenderTexture(void* TexturePtr,int Width,int Height,Unity::RenderTexturePixelFormat::Type PixelFormat)
+__export int AllocCacheRenderTexture(void* TexturePtr,int Width,int Height,Unity::boolean ReadAsFloat,Unity::RenderTexturePixelFormat::Type PixelFormat)
 {
 	try
 	{
 		SoyPixelsMeta Meta( Width, Height, Unity::GetPixelFormat( PixelFormat ) );
-		return AllocCacheRenderTexture( TexturePtr, Meta );
+		return AllocCacheRenderTexture( TexturePtr, Meta, ReadAsFloat );
 	}
 	catch(const std::exception& e)
 	{
@@ -254,12 +256,12 @@ __export int AllocCacheRenderTexture(void* TexturePtr,int Width,int Height,Unity
 	}
 }
 
-__export int AllocCacheTexture2D(void* TexturePtr,int Width,int Height,Unity::Texture2DPixelFormat::Type PixelFormat)
+__export int AllocCacheTexture2D(void* TexturePtr,int Width,int Height,Unity::boolean ReadAsFloat,Unity::Texture2DPixelFormat::Type PixelFormat)
 {
 	try
 	{
 		SoyPixelsMeta Meta( Width, Height, Unity::GetPixelFormat( PixelFormat ) );
-		return AllocCacheRenderTexture( TexturePtr, Meta );
+		return AllocCacheRenderTexture( TexturePtr, Meta, ReadAsFloat );
 	}
 	catch(const std::exception& e)
 	{
@@ -413,5 +415,40 @@ __export int ReadPixelBytesFromCache(int CacheIndex,uint8_t* ByteData,int ByteDa
 		return -1;
 	}
 }
+
+
+__export int ReadPixelFloatsFromCache(int CacheIndex,Unity::Float* ByteData,int ByteDataSize)
+{
+	try
+	{
+		auto& Cache = PopReadPixels::GetCache( CacheIndex );
+		std::lock_guard<std::mutex> Lock( Cache.mLastReadPixelsLock );
+		if ( !Cache.mLastReadPixels.IsValid() )
+			return -1;
+		auto ByteDataArray = GetRemoteArray( ByteData, static_cast<size_t>(ByteDataSize) );
+		const auto& SourceByteArray = Cache.mLastReadPixels.GetPixelsArray();
+		
+		//	cast to float. Remember to check alignment etc
+		auto SourceFloatArray = GetArrayBridge(SourceByteArray).GetSubArray<float>( 0, SourceByteArray.GetSize() / 4 );
+		ByteDataArray.Copy( SourceFloatArray );
+		
+		return Cache.mRevision;
+	}
+	catch(const std::exception& e)
+	{
+		std::stringstream Error;
+		Error << "Exception in " << __func__ << " " << e.what();
+		PopUnity::DebugLog( Error.str() );
+		return -1;
+	}
+	catch(...)
+	{
+		std::stringstream Error;
+		Error << "Unknown exception in " << __func__;
+		PopUnity::DebugLog( Error.str() );
+		return -1;
+	}
+}
+
 
 

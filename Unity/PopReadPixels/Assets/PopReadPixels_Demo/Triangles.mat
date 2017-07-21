@@ -39,5 +39,8 @@ Material:
         name: ColourA
       second: {r: 0.89705884, g: 0.63549244, b: 0.07255624, a: 1}
     - first:
+        name: ColourAdd
+      second: {r: 0.3602941, g: 0.29406354, b: 0.29406354, a: 1}
+    - first:
         name: ColourB
       second: {r: 0.5521715, g: 0.43966264, b: 0.78676474, a: 1}

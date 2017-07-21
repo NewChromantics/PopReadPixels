@@ -6,6 +6,9 @@
 		TimeSpeed("TimeSpeed", Range(0.01,10.0) ) = 0.5
 		ColourA("ColourA", COLOR ) = (0,0,0,1)
 		ColourB("ColourB", COLOR ) = (1,1,1,1)
+
+		ColourAdd("ColourAdd", COLOR ) = (0,0,0,0)
+
 	}
 	SubShader
 	{
@@ -38,6 +41,7 @@
 			float TimeSpeed;
 			float4 ColourA;
 			float4 ColourB;
+			float4 ColourAdd;
 			
 			v2f vert (appdata v)
 			{
@@ -64,7 +68,7 @@
 				float RingSize = 0.5f;
 
 				float Ring = fmod( Radius, RingSize ) / RingSize;
-				return ( Ring < 0.5f ) ? ColourA : ColourB;
+				return ColourAdd + (( Ring < 0.5f ) ? ColourA : ColourB);
 			}
 			ENDCG
 		}
