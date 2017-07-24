@@ -65,13 +65,16 @@ public class BlitToJpeg : MonoBehaviour {
 
 		};
 
+		if (DynamicTexture.useMipMap)
+			Debug.LogWarning (DynamicTexture.name + " has mip maps");
 		Graphics.Blit (null, DynamicTexture, DynamicShader);
+		/*
 		var Temp = new Texture2D (DynamicTexture.width, DynamicTexture.height, TextureFormat.RGBAFloat, false);
 		RenderTexture.active = DynamicTexture;
 		Temp.ReadPixels (new Rect (0, 0, DynamicTexture.width, DynamicTexture.height), 0, 0);
 		LastPixels = Temp.GetPixels ();
-
-
+		RenderTexture.active = null;
+*/
 		if (AsyncRead != null) {
 
 			//	trigger a read next time

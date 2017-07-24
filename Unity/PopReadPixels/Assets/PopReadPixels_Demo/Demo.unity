@@ -1012,8 +1012,9 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEvent_String, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  OutputFormat: 20
-  MaxRowsToRead: 200
+  OutputFormat: 4
+  MaxRowsToRead: 1024
+  ReadBackwards: 1
 --- !u!1 &2096394832
 GameObject:
   m_ObjectHideFlags: 0

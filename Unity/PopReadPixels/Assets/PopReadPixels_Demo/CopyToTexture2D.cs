@@ -9,8 +9,10 @@ public class CopyToTexture2D : MonoBehaviour {
 	Texture2D						Output;
 	public TextureFormat			OutputFormat = TextureFormat.RGBAFloat;
 
-	[Range(1,200)]
-	public int						MaxRowsToRead = 200;
+	[Range(1,1024)]
+	public int						MaxRowsToRead = 1024;
+	public bool						ReadBackwards = false;
+	public bool						ForceAlphaOne = false;
 
 	public void OnPixels(float[] Bytes,Vector2 Size,int ChannelCount)
 	{
@@ -28,17 +30,19 @@ public class CopyToTexture2D : MonoBehaviour {
 		{
 			for ( int p=0;	p<Colours.Length;	p++)
 			{
-				var i = p * ChannelCount;
-
+				var i = (p * ChannelCount);
 				i %= ChannelCount * (int)Size.x * MaxRowsToRead;
+
+				if ( ReadBackwards )
+					i = Bytes.Length - 4 - i;
 
 				Colours[p].r = Bytes[i+0];
 				Colours[p].g = Bytes[i+1];
 				Colours[p].b = Bytes[i+2];
-				//Colours[p].a = Bytes[i+3];
-				Colours[p].a = 1;
+				Colours[p].a = Bytes[i+3];
 
-
+				if ( ForceAlphaOne )
+					Colours[p].a = 1;
 			}
 		}
 		catch (System.Exception e)
