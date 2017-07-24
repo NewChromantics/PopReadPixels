@@ -22,6 +22,7 @@ public class BlitToJpeg : MonoBehaviour {
 	public UnityEvent		OnPixelsError;
 
 	PopReadPixels.JobCache	AsyncRead;
+	Color[]					LastPixels;
 
 	void Update () {
 
@@ -65,6 +66,11 @@ public class BlitToJpeg : MonoBehaviour {
 		};
 
 		Graphics.Blit (null, DynamicTexture, DynamicShader);
+		var Temp = new Texture2D (DynamicTexture.width, DynamicTexture.height, TextureFormat.RGBAFloat, false);
+		RenderTexture.active = DynamicTexture;
+		Temp.ReadPixels (new Rect (0, 0, DynamicTexture.width, DynamicTexture.height), 0, 0);
+		LastPixels = Temp.GetPixels ();
+
 
 		if (AsyncRead != null) {
 
@@ -94,6 +100,7 @@ public class BlitToJpeg : MonoBehaviour {
 				AsyncRead = PopReadPixels.ReadPixelsAsync(DynamicTexture, OnTextureFloatPixels);
 			else
 				AsyncRead = PopReadPixels.ReadPixelsAsync(DynamicTexture, OnTextureBytePixels);
+
 		}
 
 		PopReadPixels.FlushDebug ();

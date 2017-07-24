@@ -55,6 +55,8 @@ public class SetRawImageColour : MonoBehaviour {
 			if ( TargetString != null )
 			{
 				TargetString.text = "Byte[0] = ( " + Bytes[0] + " " + Bytes[1] + " " + Bytes[2] + " " + Bytes[3] + " )";
+				TargetString.text += "\n";
+				TargetString.text += "Byte[1] = ( " + Bytes[4] + " " + Bytes[5] + " " + Bytes[6] + " " + Bytes[7] + " )";
 			}
 		}
 		catch

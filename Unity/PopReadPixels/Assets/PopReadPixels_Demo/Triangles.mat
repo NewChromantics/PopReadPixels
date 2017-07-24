@@ -27,7 +27,7 @@ Material:
       second: 0
     - first:
         name: GridSize
-      second: 10
+      second: 1
     - first:
         name: TimeSpeed
       second: 0.5
