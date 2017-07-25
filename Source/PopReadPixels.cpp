@@ -92,7 +92,7 @@ int ReadPixelFromTexture(void* TexturePtr,SoyPixelsImpl& Pixels,SoyPixelsMeta Te
 		//	assuming type atm... maybe we can extract it via opengl?
 		GLenum Type = GL_TEXTURE_2D;
 		Opengl::TTexture Texture( TexturePtr, TextureMeta, Type );
-		Texture.Read( Pixels );
+		Texture.Read( Pixels, SoyPixelsFormat::Invalid, false );
 		return 0;
 	}
 #endif
