@@ -67,9 +67,11 @@ public static class PopReadPixels
 		int?		LastRevision = null;
 		int			Channels = 4;
 		byte[]		PixelBytes;
+		GCHandle?	PixelBytesAllocHandle;
 		System.Action<byte[],int,string>	ByteCallback;
 
 		float[]		PixelFloats;
+		GCHandle?	PixelFloatsAllocHandle;
 		System.Action<float[],int,string>	FloatCallback;
 		IntPtr		TexturePtr;
 		IntPtr		PluginFunction;
@@ -82,6 +84,7 @@ public static class PopReadPixels
 				throw new System.Exception("Failed to allocate cache index");
 
 			PixelBytes = new byte[texture.width * texture.height * Channels];
+			PixelBytesAllocHandle = GCHandle.Alloc( PixelBytes, GCHandleType.Pinned );
 			ByteCallback = _Callback;
 			PluginFunction = GetReadPixelsFromCacheFunc();
 		}
@@ -94,6 +97,7 @@ public static class PopReadPixels
 				throw new System.Exception("Failed to allocate cache index");
 
 			PixelBytes = new byte[texture.width * texture.height * Channels];
+			PixelBytesAllocHandle = GCHandle.Alloc( PixelBytes, GCHandleType.Pinned );
 			ByteCallback = _Callback;
 			PluginFunction = GetReadPixelsFromCacheFunc();
 		}
@@ -106,6 +110,7 @@ public static class PopReadPixels
 				throw new System.Exception("Failed to allocate cache index");
 
 			PixelFloats = new float[texture.width * texture.height * Channels];
+			PixelFloatsAllocHandle = GCHandle.Alloc( PixelFloats, GCHandleType.Pinned );
 			FloatCallback = _Callback;
 			PluginFunction = GetReadPixelsFromCacheFunc();
 		}
@@ -118,6 +123,7 @@ public static class PopReadPixels
 				throw new System.Exception("Failed to allocate cache index");
 
 			PixelFloats = new float[texture.width * texture.height * Channels];
+			PixelFloatsAllocHandle = GCHandle.Alloc( PixelFloats, GCHandleType.Pinned );
 			FloatCallback = _Callback;
 			PluginFunction = GetReadPixelsFromCacheFunc();
 		}
@@ -181,6 +187,20 @@ public static class PopReadPixels
 		{
 			if ( CacheIndex.HasValue )
 				ReleaseCache( CacheIndex.Value );
+
+			if (PixelFloatsAllocHandle != null) 
+			{
+				PixelFloatsAllocHandle.Value.Free ();
+				PixelFloatsAllocHandle = null;
+				PixelFloats = null;
+			}
+
+			if (PixelBytesAllocHandle != null) 
+			{
+				PixelBytesAllocHandle.Value.Free ();
+				PixelBytesAllocHandle = null;
+				PixelBytes = null;
+			}
 		}
 	}
 
