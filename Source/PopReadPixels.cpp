@@ -417,7 +417,7 @@ __export int ReadPixelBytesFromCache(int CacheIndex,uint8_t* ByteData,int ByteDa
 }
 
 
-__export int ReadPixelFloatsFromCache(int CacheIndex,Unity::Float* ByteData,int ByteDataSize)
+__export int ReadPixelFloatsFromCache(int CacheIndex,float* ByteData,int ByteDataSize)
 {
 	try
 	{

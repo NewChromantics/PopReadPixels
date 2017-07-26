@@ -14,6 +14,6 @@ __export void					ReleaseCache(int Cache);
 __api(void)						ReadPixelsFromCache(int Cache);
 
 __export int					ReadPixelBytesFromCache(int Cache,uint8_t* ByteData,int ByteDataSize);
-__export int					ReadPixelFloatsFromCache(int Cache,Unity::Float* FloatData,int FloatDataSize);
+__export int					ReadPixelFloatsFromCache(int Cache,float* FloatData,int FloatDataSize);
 
 
