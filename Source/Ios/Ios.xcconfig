@@ -16,7 +16,7 @@ LIBRARY_SEARCH_PATHS = $(LIBRARY_SEARCH_PATHS_BASE)
 CLANG_CXX_LANGUAGE_STANDARD = c++0x
 CLANG_CXX_LIBRARY = libc++
 
-
+OTHER_CPLUSPLUSFLAGS = -fembed-bitcode
 
 //	manage obj-c auto release ourselves so we can use the pointers in c++ classes
 //	ie. without needing @property(strong) NSWindow* window;
