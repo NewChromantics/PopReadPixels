@@ -128,10 +128,21 @@ public static class PopReadPixels
 			PluginFunction = GetReadPixelsFromCacheFunc();
 		}
 
+		Camera.CameraCallback	IssueEventCallback = null;
 
-		public void ReadAsync()
+		public void ReadAsync(Camera AfterCamera=null)
 		{
-			GL.IssuePluginEvent( PluginFunction, CacheIndex.Value );
+			if (AfterCamera != null) {
+				if (IssueEventCallback == null) {
+					IssueEventCallback = (c) => {
+						if ( c == AfterCamera )
+							GL.IssuePluginEvent (PluginFunction, CacheIndex.Value);
+					};
+					Camera.onPostRender += IssueEventCallback;
+				}
+			} else {
+				GL.IssuePluginEvent (PluginFunction, CacheIndex.Value);
+			}
 		}
 
 		protected virtual void Finalize()
@@ -201,43 +212,48 @@ public static class PopReadPixels
 				PixelBytesAllocHandle = null;
 				PixelBytes = null;
 			}
+
+			if (IssueEventCallback != null) {
+				Camera.onPostRender -= IssueEventCallback;
+				IssueEventCallback = null;
+			}
 		}
 	}
 
-	public static JobCache ReadPixelsAsync(Texture texture,System.Action<byte[],int,string> Callback)
+	public static JobCache ReadPixelsAsync(Texture texture,System.Action<byte[],int,string> Callback,Camera AfterCamera)
 	{
 		Debug.Log ("allocating");
 		if ( texture is RenderTexture )
 		{
 			var Job = new JobCache( texture as RenderTexture, Callback );
-			Job.ReadAsync();
+			Job.ReadAsync(AfterCamera);
 			return Job;
 		}
 
 		if ( texture is Texture2D )
 		{
 			var Job = new JobCache( texture as Texture2D, Callback );
-			Job.ReadAsync();
+			Job.ReadAsync(AfterCamera);
 			return Job;
 		}
 
 		throw new System.Exception("Texture type not handled");
 	}
 
-	public static JobCache ReadPixelsAsync(Texture texture,System.Action<float[],int,string> Callback)
+	public static JobCache ReadPixelsAsync(Texture texture,System.Action<float[],int,string> Callback,Camera AfterCamera)
 	{
 		Debug.Log ("allocating");
 		if ( texture is RenderTexture )
 		{
 			var Job = new JobCache( texture as RenderTexture, Callback );
-			Job.ReadAsync();
+			Job.ReadAsync(AfterCamera);
 			return Job;
 		}
 
 		if ( texture is Texture2D )
 		{
 			var Job = new JobCache( texture as Texture2D, Callback );
-			Job.ReadAsync();
+			Job.ReadAsync(AfterCamera);
 			return Job;
 		}
 
