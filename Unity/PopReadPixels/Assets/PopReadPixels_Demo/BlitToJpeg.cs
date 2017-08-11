@@ -100,9 +100,9 @@ public class BlitToJpeg : MonoBehaviour {
 		if ( AsyncRead == null )
 		{
 			if ( ReadAsFloat )
-				AsyncRead = PopReadPixels.ReadPixelsAsync(DynamicTexture, OnTextureFloatPixels);
+				AsyncRead = PopReadPixels.ReadPixelsAsync(DynamicTexture, OnTextureFloatPixels,null);
 			else
-				AsyncRead = PopReadPixels.ReadPixelsAsync(DynamicTexture, OnTextureBytePixels);
+				AsyncRead = PopReadPixels.ReadPixelsAsync(DynamicTexture, OnTextureBytePixels,null);
 
 		}
 
