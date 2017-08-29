@@ -8,6 +8,10 @@ Explanations
 - `/Unity/PopReadPixels/` contains a demo project as well as the c# PopReadPixels interface, and .meta files for all the platform library files which tell unity which platforms each file applies to. (contained in the PopReadPixels subdirectory, so only assets under here need to be exported to a package)
 - `PopUnityCommon` inside the Unity/Demo project is an open source collection of c# scripts to help unity. Used only for the demo 
 
+Temporary fixes
+====================================
+- In `SoyLib/SoyDebug.h` comment out `#define SOYDEBUG_ENABLE`. This disables all platform logging. There were some issues using my internal debug logging with the debug output in c#. This may not actually be neccessary, but during development, this was done.
+
 Building Platform Libraries
 ====================================
 
