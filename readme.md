@@ -34,3 +34,19 @@ OSX
 - Like windows, a successfull build will copy a `PopReadPixels_OSX.bundle` into the appropriate directory (via `Build Phases`)
 - Unlike windows, if the Library is in use in the editor, NO ERROR will be thrown, but unity will continue using the old library. Re-opening the project will fix this.
 - Like windows, check the meta settings for the bundle in the inspector if you get `DLLNotFoundException` errors.
+
+IOS
+-------------------------------------
+- Open the `/PopReadPixels.xcodeproj` project with xcode
+- Change the scheme to `PopReadPixels_IOS` and build
+- A successfull build will copy a `PopReadPixels_IOS.a` into the appropriate directory (via `Build Phases`)
+- Check meta for the `.a` static library file to make sure it's setup for IOS.
+
+Android
+-------------------------------------
+- Ensure the android NDK is installed. 
+ - I personally use [homebrew](brew.sh) and install android with the command `brew install android-sdk` and `brew install android-ndk`
+- Open the `/PopReadPixels.xcodeproj` project with xcode
+- Change the scheme to `PopReadPixels_Android` and build
+- A successfull build will copy a `PopReadPixels_Android.so` into the appropriate directory (via the build script `build.sh`)
+- Check meta for the `.so` static library file to make sure it's setup for Android.
