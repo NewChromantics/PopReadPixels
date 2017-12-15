@@ -1,9 +1,8 @@
-[submodule "Source/SoyLib/"]
-	path = Source/SoyLib/
-	url = https://github.com/SoylentGraham/SoyLib.git
 [submodule "Unity/PopReadPixels/Assets/PopUnityCommon"]
 	path = Unity/PopReadPixels/Assets/PopUnityCommon
 	url = https://github.com/SoylentGraham/PopUnityCommon.git
 [submodule "Unity/PopReadPixels/Assets/PopRelayClient"]
 	path = Unity/PopReadPixels/Assets/PopRelayClient
 	url = https://github.com/NewChromantics/PopRelayClient.git
+[submodule "Source/SoyLib"]
+	url = https://github.com/SoylentGraham/SoyLib.git
