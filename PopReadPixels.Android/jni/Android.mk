@@ -6,6 +6,7 @@ SRC := ../..
 
 
 # gr: get this from env var
+# this doesn't mean anything? as it's been wrong for years
 APP_MODULE := PopMovieTexture
 
 # full speed arm instead of thumb
